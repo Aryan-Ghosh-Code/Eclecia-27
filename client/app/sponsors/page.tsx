@@ -1,12 +1,36 @@
 import type { Metadata } from "next";
 import { SponsorsView } from "@/components/sponsors/SponsorsView";
+import { getBreadcrumbJsonLd, ROUTES } from "@/constants/seo";
+
+const route = ROUTES.find((r) => r.path === "/sponsors")!;
 
 export const metadata: Metadata = {
-  title: "Sponsors: Eclecia'27",
-  description:
-    "Partner with Eclecia'27, the annual cultural fest of HITK Kolkata. 20,000+ footfall, 40+ colleges, 25+ events, 200,000+ social reach.",
+  title: route.title,
+  description: route.description,
+  alternates: {
+    canonical: "/sponsors",
+  },
+  openGraph: {
+    title: route.title,
+    description: route.description,
+    url: "/sponsors",
+    type: "website",
+  },
 };
 
 export default function SponsorsPage() {
-  return <SponsorsView />;
+  const breadcrumbJsonLd = getBreadcrumbJsonLd(
+    "/sponsors",
+    process.env.NEXT_PUBLIC_SITE_URL,
+  );
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <SponsorsView />
+    </>
+  );
 }

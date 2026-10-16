@@ -3,7 +3,7 @@ import { Cormorant_Garamond, Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "@/styles/globals.css";
 import { ASSETS } from "@/constants/assets";
-import { SEO_KEYWORDS, getStructuredData } from "@/constants/seo";
+import { SEO_KEYWORDS, getStructuredData, getBreadcrumbJsonLd } from "@/constants/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,11 +40,11 @@ export const metadata: Metadata = {
     : null,
   title: {
     default:
-      "Eclecia'27: The Annual Cultural Fest of Heritage Institute of Technology",
+      "Eclecia'27: The Annual Cultural Fest of Heritage Institute of Technology | 15-17 January 2027",
     template: "%s",
   },
   description:
-    "Welcome to Eclecia'27: The Annual Cultural Fest of Heritage Institute of Technology, Kolkata. Music, Dance, Drama, Art, Fashion and Literary events across 40+ colleges. Uniting talent, igniting culture.",
+    "Welcome to Eclecia'27: The Annual Cultural Fest of Heritage Institute of Technology, Kolkata. 15-17 January 2027. Music, Dance, Drama, Art, Fashion and Literary events across 40+ colleges. Uniting talent, igniting culture.",
   keywords: SEO_KEYWORDS,
   authors: [{ name: "Heritage Institute of Technology, Kolkata" }],
   creator: "Eclecia Tech Team",
@@ -83,9 +83,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title:
-      "Eclecia'27: The Annual Cultural Fest of Heritage Institute of Technology",
+      "Eclecia'27: The Annual Cultural Fest of Heritage Institute of Technology | 15-17 January 2027",
     description:
-      "Welcome to Eclecia'27: The Annual Cultural Fest of Heritage Institute of Technology, Kolkata. Music, Dance, Drama, Art, Fashion and Literary events across 40+ colleges. Uniting talent, igniting culture.",
+      "Welcome to Eclecia'27: The Annual Cultural Fest of Heritage Institute of Technology, Kolkata. 15-17 January 2027. Music, Dance, Drama, Art, Fashion and Literary events across 40+ colleges. Uniting talent, igniting culture.",
     url: "/",
     siteName: "Eclecia'27",
     images: [
@@ -93,18 +93,18 @@ export const metadata: Metadata = {
         url: ASSETS.cloudinary.ogImage,
         width: 1200,
         height: 630,
-        alt: "Eclecia'27 - Heritage Institute of Technology",
+        alt: "Eclecia'27 - Heritage Institute of Technology, Kolkata | 15-17 January 2027",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title:
-      "Eclecia'27: The Annual Cultural Fest of Heritage Institute of Technology",
+      "Eclecia'27: The Annual Cultural Fest of Heritage Institute of Technology | 15-17 January 2027",
     description:
-      "The annual cultural fest of Heritage Institute of Technology, Kolkata.",
+      "The annual cultural fest of Heritage Institute of Technology, Kolkata. 15-17 January 2027.",
     images: [ASSETS.cloudinary.ogImage],
   },
   robots: {
@@ -128,6 +128,10 @@ export default function RootLayout({
   const { eventJsonLd, websiteJsonLd, organizationJsonLd } = getStructuredData(
     process.env.NEXT_PUBLIC_SITE_URL,
   );
+  const breadcrumbJsonLd = getBreadcrumbJsonLd(
+    "/",
+    process.env.NEXT_PUBLIC_SITE_URL,
+  );
 
   return (
     <html
@@ -148,6 +152,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbJsonLd),
           }}
         />
 
