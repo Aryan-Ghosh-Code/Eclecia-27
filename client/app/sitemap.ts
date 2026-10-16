@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { ROUTES } from "@/constants/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
@@ -6,20 +7,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     : "";
   const lastModified = new Date();
 
-  const routes = [
-    "",
-    "/events",
-    "/schedule",
-    "/our-tale",
-    "/sponsors",
-    "/team",
-    "/register",
-  ];
-
-  return routes.map((route) => ({
-    url: baseUrl ? `${baseUrl}${route}` : route || "/",
+  return ROUTES.map((route) => ({
+    url: baseUrl ? `${baseUrl}${route.path}` : route.path || "/",
     lastModified,
-    changeFrequency: route === "" ? "daily" : "weekly",
-    priority: route === "" ? 1.0 : route === "/register" ? 0.9 : 0.8,
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
   }));
 }
