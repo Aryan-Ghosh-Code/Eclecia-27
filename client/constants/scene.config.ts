@@ -53,7 +53,7 @@ export const sceneConfig = {
    * Inertia: how much of the remaining distance the scene covers per frame
    * while catching up with the scrollbar (0 = snap, 0.1 = glide, 0.25 = tight).
    */
-  scrollSmoothing: 0.16,
+  scrollSmoothing: 0.11,
 
   /** How far (px) the moon bows off the straight line mid-travel; direction per section via `arrive`. */
   orbitArcPx: 110,
@@ -364,8 +364,8 @@ export const sceneConfig = {
   textScrim: { opacity: 0.66, bleedPx: 140 },
 
   /**
-   * Date reveal. Countdown runs to `at`; after that the section shows `dates`.
-   * TODO(content): set the real reveal moment.
+   * Date reveal. Countdown runs to `festStart`; after that the section shows
+   * `days`. Dates are 15-17 January 2027.
    */
   reveal: {
     /** Flip with NEXT_PUBLIC_DATES_REVEALED=true. */
@@ -395,9 +395,9 @@ export const sceneConfig = {
    */
   snap: {
     enabled: true,
-    idleMs: 180,
-    minMs: 250,
-    maxMs: 500,
+    idleMs: 190,
+    minMs: 320,
+    maxMs: 620,
     deadZone: 0.05,
   },
 

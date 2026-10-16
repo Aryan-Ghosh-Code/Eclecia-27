@@ -612,7 +612,7 @@ export function DatesSection({
 
       <div className="flex flex-col items-center gap-4">
         <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-parchment/45">
-          {revealed ? "The fest is in" : "The fest is in · signal encrypted"}
+          {revealed ? "The Action begins in" : "The Action begins in · signal encrypted"}
         </p>
         <Countdown compact={compact} revealed={revealed} />
       </div>

@@ -130,7 +130,7 @@ export function SiteFooter({ className = "" }: { className?: string }) {
 function BrandBit() {
   return (
     <span className="whitespace-nowrap text-gold/90 font-semibold">
-      © {new Date().getFullYear()} ECLECIA
+      © 2027 ECLECIA
     </span>
   );
 }
