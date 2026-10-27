@@ -39,7 +39,7 @@ export const ASSETS = {
     wordmarkBlacker:
       "https://res.cloudinary.com/efkowwyw/image/upload/v1790507849/eclecia-wordmark-blacker.webp",
     brochure:
-      "https://drive.google.com/file/d/1OarjRv-sIifWAAoNdLHMNbF6VMhL8cns/view?usp=sharing",
+      "https://drive.google.com/file/d/1huw__jtk1waWvTXi8dyWO_R1GplVO9Iu/view?usp=sharing",
     ogImage: "/og.png",
   },
 } as const;
