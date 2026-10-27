@@ -3,6 +3,8 @@ import { Cormorant_Garamond, Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "@/styles/globals.css";
 import { ASSETS } from "@/constants/assets";
+import { LOADER } from "@/constants/loader";
+import { SiteLoader } from "@/components/common/loader/SiteLoader";
 import { SEO_KEYWORDS, getStructuredData, getBreadcrumbJsonLd } from "@/constants/seo";
 
 const geistSans = Geist({
@@ -136,9 +138,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} ${nasyhama.variable} ${taiganja.variable} h-full antialiased`}
     >
       <head>
+        {/* Before first paint: skip the opening loader if it already played this tab session. */}
+        {LOADER.oncePerSession && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `try{if(sessionStorage.getItem(${JSON.stringify(LOADER.storageKey)})&&!/[?&]loader=/.test(location.search))document.documentElement.dataset.loaderSkip="1"}catch(e){}`,
+            }}
+          />
+        )}
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
@@ -176,8 +187,22 @@ export default function RootLayout({
         />
         <link rel="preload" as="image" href={ASSETS.cloudinary.suncover} />
         <link rel="preload" as="image" href={ASSETS.cloudinary.blacksun2} />
+        {/* Opening loader art (all variants use the wordmark). */}
+        <link rel="preload" as="image" href={ASSETS.cloudinary.wordmarkBlacker} />
+        {LOADER.variant === "eclipse" && (
+          <>
+            <link rel="preload" as="image" href={ASSETS.cloudinary.blacksun} />
+            <link rel="preload" as="image" href={ASSETS.cloudinary.minisun} />
+          </>
+        )}
+        {LOADER.variant === "curtain" && (
+          <link rel="preload" as="image" href={ASSETS.cloudinary.divider} />
+        )}
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SiteLoader />
+        {children}
+      </body>
     </html>
   );
 }

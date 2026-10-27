@@ -2,6 +2,7 @@ export * from "./common/ComingSoon";
 export * from "./common/Footer";
 export * from "./common/GoldButton";
 export * from "./common/Header";
+export * from "./common/loader/SiteLoader";
 export * from "./common/PageFade";
 export * from "./common/TransitionLink";
 export * from "./home/sections";
