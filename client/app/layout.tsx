@@ -146,7 +146,7 @@ export default function RootLayout({
         {LOADER.oncePerSession && (
           <script
             dangerouslySetInnerHTML={{
-              __html: `try{if(sessionStorage.getItem(${JSON.stringify(LOADER.storageKey)})&&!/[?&]loader=/.test(location.search))document.documentElement.dataset.loaderSkip="1"}catch(e){}`,
+              __html: `try{if(sessionStorage.getItem(${JSON.stringify(LOADER.storageKey)})&&!/[?&]loader(=|&|$)/.test(location.search))document.documentElement.dataset.loaderSkip="1"}catch(e){}`,
             }}
           />
         )}
@@ -187,17 +187,10 @@ export default function RootLayout({
         />
         <link rel="preload" as="image" href={ASSETS.cloudinary.suncover} />
         <link rel="preload" as="image" href={ASSETS.cloudinary.blacksun2} />
-        {/* Opening loader art (all variants use the wordmark). */}
+        {/* Opening loader art. */}
         <link rel="preload" as="image" href={ASSETS.cloudinary.wordmarkBlacker} />
-        {LOADER.variant === "eclipse" && (
-          <>
-            <link rel="preload" as="image" href={ASSETS.cloudinary.blacksun} />
-            <link rel="preload" as="image" href={ASSETS.cloudinary.minisun} />
-          </>
-        )}
-        {LOADER.variant === "curtain" && (
-          <link rel="preload" as="image" href={ASSETS.cloudinary.divider} />
-        )}
+        <link rel="preload" as="image" href={ASSETS.cloudinary.blacksun} />
+        <link rel="preload" as="image" href={ASSETS.cloudinary.minisun} />
       </head>
       <body className="min-h-full flex flex-col">
         <SiteLoader />

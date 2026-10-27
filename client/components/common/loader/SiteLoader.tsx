@@ -1,55 +1,44 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
-import {
-  LOADER,
-  LOADER_VARIANTS,
-  type LoaderVariant,
-} from "@/constants/loader";
-import { CurtainLoader, EclipseLoader, YantraLoader } from "./variants";
-
-const VIEWS = {
-  eclipse: EclipseLoader,
-  curtain: CurtainLoader,
-  yantra: YantraLoader,
-} as const;
-
-/** `?loader=curtain` or `?loader=2` → variant; anything else → null. */
-function variantFromQuery(q: string | null): LoaderVariant | null {
-  if (!q) return null;
-  const n = Number(q);
-  if (Number.isInteger(n) && n >= 1 && n <= LOADER_VARIANTS.length) {
-    return LOADER_VARIANTS[n - 1];
-  }
-  return (LOADER_VARIANTS as readonly string[]).includes(q)
-    ? (q as LoaderVariant)
-    : null;
-}
+import { ASSETS } from "@/constants/assets";
+import { LOADER } from "@/constants/loader";
 
 /**
- * The SSR'd markup is the default variant, so its CSS keyframes start at
- * first paint, before hydration. JS only decides when to exit: after the
- * intro, once the window has loaded (capped at maxWaitMs).
+ * The SSR'd markup's CSS keyframes start at first paint, before hydration.
+ * JS only decides when to exit: after the intro, once the window has loaded
+ * (capped at maxWaitMs).
  */
 function firstPaintMs(): number {
   const fcp = performance.getEntriesByName("first-contentful-paint")[0];
   return fcp ? fcp.startTime : performance.now();
 }
 
+const art = (src: string, className: string) => (
+  <img
+    src={src}
+    alt=""
+    aria-hidden
+    draggable={false}
+    decoding="async"
+    className={`pointer-events-none max-w-none select-none ${className}`}
+  />
+);
+
+/**
+ * Opening loader: totality. A gold sun, the black moon slides across it, a
+ * diamond-ring flash at second contact, then the corona (the hero's rays
+ * layer) blooms and the mini sun lights on the moon exactly as it sits in
+ * the hero. Exit: an iris opens out of the moon's centre onto the site.
+ */
 export function SiteLoader() {
-  const [variant, setVariant] = useState<LoaderVariant>(LOADER.variant);
   const [phase, setPhase] = useState<"intro" | "exit" | "gone">("intro");
-  /** performance.now() at which the current variant's keyframes started. */
-  const [origin, setOrigin] = useState<number | null>(null);
 
   useEffect(() => {
-    const forced = variantFromQuery(
-      new URLSearchParams(window.location.search).get("loader"),
-    );
+    const forced = new URLSearchParams(window.location.search).has("loader");
     const skip = !forced && !!document.documentElement.dataset.loaderSkip;
-    // A forced variant remounts under a new key, so its keyframes restart now.
-    const switching = !!forced && forced !== LOADER.variant;
-    const start = switching ? performance.now() : firstPaintMs();
+    const start = firstPaintMs();
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const introMs = reduce ? 400 : LOADER.buildMs;
 
@@ -68,8 +57,6 @@ export function SiteLoader() {
       await wait(0);
       if (cancelled) return;
       if (skip) return setPhase("gone");
-      if (switching) setVariant(forced);
-      setOrigin(start);
 
       await wait(start + introMs - performance.now());
       await Promise.race([
@@ -95,15 +82,33 @@ export function SiteLoader() {
 
   if (phase === "gone") return null;
 
-  const View = VIEWS[variant];
   return (
     <div
-      key={variant}
-      className={`site-loader site-loader--${variant}${phase === "exit" ? " is-exit" : ""}`}
+      className={`site-loader${phase === "exit" ? " is-exit" : ""}`}
       role="status"
       aria-label="Loading Eclecia"
     >
-      <View origin={origin} />
+      <div className="ld-eclipse">
+        {art(ASSETS.cloudinary.bg, "ld-sky")}
+        <div className="ld-stage">
+          <svg className="ld-orbit" viewBox="0 0 100 100" aria-hidden>
+            <circle cx="50" cy="50" r="49" pathLength={1} />
+          </svg>
+          <div className="ld-rays-spin">
+            {art(ASSETS.cloudinary.blacksun, "ld-rays")}
+          </div>
+          <div className="ld-sun" />
+          {art(ASSETS.cloudinary.blacksun2, "ld-moon")}
+          <span className="ld-diamond" />
+          {art(ASSETS.cloudinary.minisun, "ld-minisun")}
+        </div>
+        <div className="ld-caption">
+          <p className="ld-eyebrow font-taiganja">
+            Heritage Institute of Technology, Kolkata
+          </p>
+          {art(ASSETS.cloudinary.wordmarkBlacker, "ld-wordmark")}
+        </div>
+      </div>
     </div>
   );
 }
