@@ -1,6 +1,6 @@
 /* === Opening loader: eclipse totality ======================================
-   (components/common/loader). The intro is authored against a 2.4 s timeline
-   that starts at first paint; `.is-exit` plays the 0.6 s reveal.
+   (components/common/loader). The intro is authored against a 4.2 s timeline
+   that starts at first paint; `.is-exit` plays the 0.8 s reveal (5 s total).
    Keep in sync with LOADER.buildMs / exitMs in constants/loader.ts.
    ============================================================================ */
 
@@ -33,7 +33,7 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   height: 108%;
   object-fit: cover;
   opacity: 0;
-  animation: ld-sky-in 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: ld-sky-in 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 @keyframes ld-sky-in {
   from { opacity: 0; transform: scale(1.08); }
@@ -70,25 +70,6 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
 }
 .ld-stage > * { position: absolute; }
 
-/* Progress orbit: a hairline that closes as the intro plays. */
-.ld-orbit {
-  inset: -9%;
-  width: 118%;
-  height: 118%;
-  transform: rotate(-90deg);
-  overflow: visible;
-}
-.ld-orbit circle {
-  fill: none;
-  stroke: var(--gold);
-  stroke-width: 0.18;
-  stroke-linecap: round;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  opacity: 0.55;
-  animation: ld-draw 2.4s cubic-bezier(0.45, 0.05, 0.35, 1) both;
-}
-
 .ld-rays {
   --rw: var(--ld-rw, calc(var(--S) * 0.99));
   left: calc(50% + var(--ld-rx, var(--mx)) - var(--mx) - var(--rw) / 2);
@@ -96,7 +77,7 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   width: var(--rw);
   height: var(--rw);
   opacity: 0;
-  animation: ld-rays-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
+  animation: ld-rays-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2.3s both;
 }
 @keyframes ld-rays-in {
   0% { opacity: 0; transform: scale(0.62) rotate(-28deg); filter: brightness(2.2) blur(6px); }
@@ -116,8 +97,8 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
     0 0 calc(var(--S) * 0.12) calc(var(--S) * 0.04) rgba(255, 196, 96, 0.6),
     0 0 calc(var(--S) * 0.4) calc(var(--S) * 0.1) rgba(217, 164, 65, 0.28);
   animation:
-    ld-sun-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.05s both,
-    ld-sun-dim 0.9s ease-in 0.45s both;
+    ld-sun-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s both,
+    ld-sun-dim 1.6s ease-in 0.8s both;
 }
 @keyframes ld-sun-in {
   from { opacity: 0; transform: scale(0.82); }
@@ -133,7 +114,7 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   inset: 0;
   width: 100%;
   height: 100%;
-  animation: ld-moon-cross 1s cubic-bezier(0.55, 0, 0.2, 1) 0.25s both;
+  animation: ld-moon-cross 1.8s cubic-bezier(0.55, 0, 0.2, 1) 0.5s both;
 }
 @keyframes ld-moon-cross {
   0% { opacity: 0; transform: translate(-82%, 26%); }
@@ -153,7 +134,7 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
     linear-gradient(90deg, transparent 0 20%, rgba(255, 240, 210, 0.9) 50%, transparent 80% 100%) center / 100% 2% no-repeat,
     linear-gradient(0deg, transparent 0 30%, rgba(255, 240, 210, 0.8) 50%, transparent 70% 100%) center / 1.5% 100% no-repeat;
   mix-blend-mode: screen;
-  animation: ld-diamond 0.55s cubic-bezier(0.2, 0.8, 0.3, 1) 1.12s both;
+  animation: ld-diamond 0.8s cubic-bezier(0.2, 0.8, 0.3, 1) 2.15s both;
 }
 @keyframes ld-diamond {
   0% { opacity: 0; transform: translate(-50%, -50%) scale(0) rotate(0); }
@@ -169,7 +150,7 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   width: var(--sw);
   height: auto;
   opacity: 0;
-  animation: ld-bloom 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.55s both;
+  animation: ld-bloom 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.8s both;
 }
 @keyframes ld-bloom {
   from { opacity: 0; transform: scale(0.55); filter: brightness(2) blur(4px); }
@@ -197,7 +178,7 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   text-transform: uppercase;
   color: rgba(236, 228, 210, 0.85);
   white-space: nowrap;
-  animation: ld-track-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 1.65s both;
+  animation: ld-track-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 2.95s both;
 }
 @keyframes ld-track-in {
   from { opacity: 0; letter-spacing: 0.55em; }
@@ -207,7 +188,7 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   width: min(70vw, 340px);
   height: auto;
   margin-top: -2%;
-  animation: ld-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 1.8s both;
+  animation: ld-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 3.15s both;
 }
 @keyframes ld-rise {
   from { opacity: 0; transform: translateY(14px) scale(0.96); filter: blur(8px); }
@@ -218,20 +199,18 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
 .site-loader.is-exit {
   -webkit-mask-image: radial-gradient(circle at var(--ld-mx, 50%) var(--ld-my, 30%), transparent var(--ld-iris), #000 calc(var(--ld-iris) + 6vmin));
   mask-image: radial-gradient(circle at var(--ld-mx, 50%) var(--ld-my, 30%), transparent var(--ld-iris), #000 calc(var(--ld-iris) + 6vmin));
-  animation: ld-iris 0.6s cubic-bezier(0.65, 0, 0.35, 1) both;
+  animation: ld-iris 0.8s cubic-bezier(0.65, 0, 0.35, 1) both;
 }
 @keyframes ld-iris {
   from { --ld-iris: -6vmin; }
   to { --ld-iris: 130vmax; }
 }
-.is-exit .ld-orbit { animation: ld-fade-out 0.3s ease-in both; }
-.is-exit .ld-caption { animation: ld-fade-out 0.3s ease-in both; }
+.is-exit .ld-caption { animation: ld-fade-out 0.4s ease-in both; }
 
 /* ---------------------------------------------------------------------------
    Shared
    --------------------------------------------------------------------------- */
 
-@keyframes ld-draw { to { stroke-dashoffset: 0; } }
 @keyframes ld-fade-out { to { opacity: 0; } }
 
 @media (prefers-reduced-motion: reduce) {

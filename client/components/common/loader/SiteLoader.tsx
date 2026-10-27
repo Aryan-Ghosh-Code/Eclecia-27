@@ -10,9 +10,11 @@ import { LOADER } from "@/constants/loader";
  * JS only decides when to exit: after the intro, once the window has loaded
  * (capped at maxWaitMs).
  */
-function firstPaintMs(): number {
+function firstPaintMs(): Promise<number> {
   const fcp = performance.getEntriesByName("first-contentful-paint")[0];
-  return fcp ? fcp.startTime : performance.now();
+  if (fcp) return Promise.resolve(fcp.startTime);
+  // Hydrated before first paint (common in dev): the next frame is that paint.
+  return new Promise((res) => requestAnimationFrame(res));
 }
 
 const art = (src: string, className: string) => (
@@ -39,7 +41,6 @@ export function SiteLoader() {
   useEffect(() => {
     const forced = new URLSearchParams(window.location.search).has("loader");
     const skip = !forced && !!document.documentElement.dataset.loaderSkip;
-    const start = firstPaintMs();
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const introMs = reduce ? 400 : LOADER.buildMs;
 
@@ -58,6 +59,7 @@ export function SiteLoader() {
       await wait(0);
       if (cancelled) return;
       if (skip) return setPhase("gone");
+      const start = await firstPaintMs();
 
       await wait(start + introMs - performance.now());
       await Promise.race([
@@ -92,9 +94,6 @@ export function SiteLoader() {
       <div className="ld-eclipse">
         {art(ASSETS.cloudinary.bg, "ld-sky")}
         <div className="ld-stage">
-          <svg className="ld-orbit" viewBox="0 0 100 100" aria-hidden>
-            <circle cx="50" cy="50" r="49" pathLength={1} />
-          </svg>
           {art(ASSETS.cloudinary.blacksun, "ld-rays")}
           <div className="ld-sun" />
           {art(ASSETS.cloudinary.blacksun2, "ld-moon")}
