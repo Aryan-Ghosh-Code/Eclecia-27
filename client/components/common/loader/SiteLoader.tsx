@@ -29,8 +29,9 @@ const art = (src: string, className: string) => (
 /**
  * Opening loader: totality. A gold sun, the black moon slides across it, a
  * diamond-ring flash at second contact, then the corona (the hero's rays
- * layer) blooms and the mini sun lights on the moon exactly as it sits in
- * the hero. Exit: an iris opens out of the moon's centre onto the site.
+ * layer) blooms and the mini sun lights. Every layer sits exactly on the
+ * hero's eclipse (see bootScript.ts), so the exit iris, opening from the
+ * moon's centre, hands over to the identical eclipse underneath.
  */
 export function SiteLoader() {
   const [phase, setPhase] = useState<"intro" | "exit" | "gone">("intro");
@@ -94,9 +95,7 @@ export function SiteLoader() {
           <svg className="ld-orbit" viewBox="0 0 100 100" aria-hidden>
             <circle cx="50" cy="50" r="49" pathLength={1} />
           </svg>
-          <div className="ld-rays-spin">
-            {art(ASSETS.cloudinary.blacksun, "ld-rays")}
-          </div>
+          {art(ASSETS.cloudinary.blacksun, "ld-rays")}
           <div className="ld-sun" />
           {art(ASSETS.cloudinary.blacksun2, "ld-moon")}
           <span className="ld-diamond" />

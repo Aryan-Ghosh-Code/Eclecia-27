@@ -3,8 +3,8 @@ import { Cormorant_Garamond, Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "@/styles/globals.css";
 import { ASSETS } from "@/constants/assets";
-import { LOADER } from "@/constants/loader";
 import { SiteLoader } from "@/components/common/loader/SiteLoader";
+import { loaderBootScript } from "@/components/common/loader/bootScript";
 import { SEO_KEYWORDS, getStructuredData, getBreadcrumbJsonLd } from "@/constants/seo";
 
 const geistSans = Geist({
@@ -142,14 +142,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} ${nasyhama.variable} ${taiganja.variable} h-full antialiased`}
     >
       <head>
-        {/* Before first paint: skip the opening loader if it already played this tab session. */}
-        {LOADER.oncePerSession && (
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `try{if(sessionStorage.getItem(${JSON.stringify(LOADER.storageKey)})&&!/[?&]loader(=|&|$)/.test(location.search))document.documentElement.dataset.loaderSkip="1"}catch(e){}`,
-            }}
-          />
-        )}
+        {/* Before first paint: skip the loader on repeat visits, else pin its eclipse onto the hero's. */}
+        <script dangerouslySetInnerHTML={{ __html: loaderBootScript() }} />
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"

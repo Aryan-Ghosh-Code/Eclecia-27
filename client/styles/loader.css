@@ -44,26 +44,31 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
    Eclipse
    --------------------------------------------------------------------------- */
 
-.ld-eclipse { --S: min(66vw, 50vh, 440px); }
+/* Geometry comes from the head boot script (components/common/loader/bootScript.ts):
+   --ld-{m,r,s}{x,y,w} = viewport centre + width of the hero's moon, rays and
+   mini sun. Fallbacks only matter if that script never ran. */
+.ld-eclipse {
+  --mx: var(--ld-mx, 50vw);
+  --my: var(--ld-my, 30vh);
+  --S: var(--ld-mw, min(66vw, 50vh, 440px));
+}
 .ld-eclipse::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 42%, transparent 20%, rgba(5, 5, 7, 0.85) 75%);
+  background: radial-gradient(circle at var(--mx) var(--my), transparent calc(var(--S) * 0.6), rgba(5, 5, 7, 0.85) calc(var(--S) * 1.8));
   pointer-events: none;
 }
 
 .ld-stage {
   position: absolute;
-  left: 50%;
-  top: 42%;
+  left: calc(var(--mx) - var(--S) / 2);
+  top: calc(var(--my) - var(--S) / 2);
   width: var(--S);
   height: var(--S);
-  transform: translate(-50%, -50%);
   z-index: 1;
 }
-.ld-stage > *,
-.ld-rays-spin > * { position: absolute; }
+.ld-stage > * { position: absolute; }
 
 /* Progress orbit: a hairline that closes as the intro plays. */
 .ld-orbit {
@@ -84,14 +89,12 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   animation: ld-draw 2.4s cubic-bezier(0.45, 0.05, 0.35, 1) both;
 }
 
-.ld-rays-spin {
-  inset: 0;
-  animation: ld-spin 26s linear infinite;
-}
 .ld-rays {
-  inset: 0.5%;
-  width: 99%;
-  height: 99%;
+  --rw: var(--ld-rw, calc(var(--S) * 0.99));
+  left: calc(50% + var(--ld-rx, var(--mx)) - var(--mx) - var(--rw) / 2);
+  top: calc(50% + var(--ld-ry, var(--my)) - var(--my) - var(--rw) / 2);
+  width: var(--rw);
+  height: var(--rw);
   opacity: 0;
   animation: ld-rays-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
 }
@@ -159,9 +162,11 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
 }
 
 .ld-minisun {
-  left: 35%;
-  top: 30.2%;
-  width: 30%;
+  /* Art is 133 x 199. */
+  --sw: var(--ld-sw, calc(var(--S) * 0.3));
+  left: calc(50% + var(--ld-sx, var(--mx)) - var(--mx) - var(--sw) / 2);
+  top: calc(50% + var(--ld-sy, calc(var(--my) + var(--S) * 0.078)) - var(--my) - var(--sw) * 0.748);
+  width: var(--sw);
   height: auto;
   opacity: 0;
   animation: ld-bloom 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.55s both;
@@ -173,13 +178,16 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
 
 .ld-caption {
   position: absolute;
+  /* Centred in the space under the eclipse. */
   left: 50%;
-  top: calc(42% + var(--S) * 0.56);
+  top: calc(var(--my) + var(--S) * 0.62);
+  bottom: 0;
   transform: translateX(-50%);
   width: min(86vw, 440px);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 2px;
   z-index: 1;
 }
@@ -206,27 +214,23 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   to { opacity: 1; transform: none; filter: blur(0); }
 }
 
-/* Exit: an iris opens from the moon's centre. */
+/* Exit: an iris opens from the moon's centre onto the identical hero eclipse. */
 .site-loader.is-exit {
-  -webkit-mask-image: radial-gradient(circle at 50% 42%, transparent var(--ld-iris), #000 calc(var(--ld-iris) + 6vmin));
-  mask-image: radial-gradient(circle at 50% 42%, transparent var(--ld-iris), #000 calc(var(--ld-iris) + 6vmin));
+  -webkit-mask-image: radial-gradient(circle at var(--ld-mx, 50%) var(--ld-my, 30%), transparent var(--ld-iris), #000 calc(var(--ld-iris) + 6vmin));
+  mask-image: radial-gradient(circle at var(--ld-mx, 50%) var(--ld-my, 30%), transparent var(--ld-iris), #000 calc(var(--ld-iris) + 6vmin));
   animation: ld-iris 0.6s cubic-bezier(0.65, 0, 0.35, 1) both;
 }
 @keyframes ld-iris {
   from { --ld-iris: -6vmin; }
   to { --ld-iris: 130vmax; }
 }
-.is-exit .ld-stage { animation: ld-stage-out 0.6s cubic-bezier(0.65, 0, 0.35, 1) both; }
-@keyframes ld-stage-out {
-  to { transform: translate(-50%, -50%) scale(1.35); opacity: 0; }
-}
+.is-exit .ld-orbit { animation: ld-fade-out 0.3s ease-in both; }
 .is-exit .ld-caption { animation: ld-fade-out 0.3s ease-in both; }
 
 /* ---------------------------------------------------------------------------
    Shared
    --------------------------------------------------------------------------- */
 
-@keyframes ld-spin { to { transform: rotate(360deg); } }
 @keyframes ld-draw { to { stroke-dashoffset: 0; } }
 @keyframes ld-fade-out { to { opacity: 0; } }
 
