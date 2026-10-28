@@ -3,11 +3,11 @@
    that starts at first paint; `.is-exit` plays the 0.8 s reveal (5 s total).
    Keep in sync with LOADER.buildMs / exitMs in constants/loader.ts.
 
-   0.05  title card: presenter line, "presents"        → out 0.85
+   0.05  title card: presenter line, "presents"        → out 1.55
    0.55  gold dust drifts in and gathers into the sun  → sun born 1.15
-   1.35  event categories light up under it           → out 2.55
+   1.85  event categories light up under it           → out 2.80
    1.70  moon crosses; diamond ring 2.50; rays 2.65
-   2.55  shadow figures rise, backlit by the corona
+   2.55  art figures rise into the corona's light
    3.00  mini sun; wordmark painted on; lotus divider 3.60
    ============================================================================ */
 
@@ -68,22 +68,24 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
    --------------------------------------------------------------------------- */
 
 .ld-title {
+  /* Same slot as the categories and wordmark that follow: under the eclipse. */
   position: absolute;
-  inset: 0;
+  inset: calc(var(--my) + var(--S) * 0.62) 0 0;
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 0 16px;
+  gap: 10px;
+  padding: 0 20px;
   text-align: center;
-  animation: ld-title-out 0.35s ease-in 0.85s both;
+  animation: ld-title-out 0.35s ease-in 1.55s both;
 }
 .ld-title-eyebrow {
   margin: 0;
-  max-width: 36em;
-  font-size: clamp(10px, 2.6vw, 13px);
+  max-width: 30em;
+  font-size: clamp(13px, 3.4vw, 19px);
+  line-height: 1.6;
   text-transform: uppercase;
   text-wrap: balance;
   color: rgba(236, 228, 210, 0.92);
@@ -91,9 +93,10 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
 }
 .ld-title-presents {
   margin: 0;
-  font-size: clamp(18px, 4.4vw, 24px);
-  color: rgba(236, 228, 210, 0.8);
-  animation: ld-rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s both;
+  font-size: clamp(26px, 7vw, 40px);
+  line-height: 1;
+  color: rgba(236, 228, 210, 0.85);
+  animation: ld-rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) 0.35s both;
 }
 @keyframes ld-title-out {
   to { opacity: 0; transform: translateY(-10px); filter: blur(4px); }
@@ -140,7 +143,7 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   padding: 0;
   max-width: min(90vw, 620px);
   list-style: none;
-  animation: ld-fade-out 0.35s ease-in 2.55s both;
+  animation: ld-fade-out 0.3s ease-in 2.8s both;
 }
 .ld-cats li {
   display: flex;
@@ -151,7 +154,7 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   color: var(--gold);
   text-shadow: 0 0 12px rgba(217, 164, 65, 0.45);
   opacity: 0;
-  animation: ld-cat-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) calc(1.35s + var(--i) * 0.11s) both;
+  animation: ld-cat-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) calc(1.85s + var(--i) * 0.08s) both;
 }
 /* Taiganja has no middle dot: a small gold lozenge separates the words. */
 .ld-cats li + li::before {
@@ -270,41 +273,37 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
 }
 
 /* ---------------------------------------------------------------------------
-   5. Shadow figures, backlit by the corona (shadow-puppet theatre)
+   5. Art figures from the scene rise into the corona's light
    --------------------------------------------------------------------------- */
 
-.ld-shadows { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-.ld-shadow {
+.ld-figures { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.ld-figure {
   position: absolute;
   height: auto;
-  /* Near-black cut-out with a gold rim: lit from behind, detail just visible. */
-  filter:
-    brightness(0.22) saturate(0.6)
-    drop-shadow(0 0 1.5px rgba(240, 200, 120, 0.95))
-    drop-shadow(0 0 14px rgba(217, 164, 65, 0.4));
+  filter: drop-shadow(0 0 18px rgba(217, 164, 65, 0.25));
   opacity: 0;
-  animation: ld-shadow-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) calc(2.55s + var(--i) * 0.08s) both;
+  animation: ld-figure-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) calc(2.55s + var(--i) * 0.08s) both;
 }
-.ld-shadow--veena { left: -1.5%; bottom: -2%; width: min(32vw, 400px); }
-.ld-shadow--hand { right: -1%; bottom: -3%; width: min(20vw, 250px); }
-.ld-shadow--banner { top: 7vh; height: min(52vh, 460px); width: auto; display: none; }
-.ld-shadow--banner-l { left: 2vw; }
-.ld-shadow--banner-r { right: 2vw; scale: -1 1; }
-@keyframes ld-shadow-up {
+.ld-figure--veena { left: -1.5%; bottom: -2%; width: min(32vw, 400px); }
+.ld-figure--hand { right: -1%; bottom: -3%; width: min(20vw, 250px); }
+.ld-figure--banner { top: 7vh; height: min(52vh, 460px); width: auto; display: none; }
+.ld-figure--banner-l { left: 2vw; }
+.ld-figure--banner-r { right: 2vw; scale: -1 1; }
+@keyframes ld-figure-up {
   from { opacity: 0; transform: translateY(28%); }
-  to { opacity: 0.95; transform: none; }
+  to { opacity: 1; transform: none; }
 }
 /* Wide landscape screens have room for the mirrored banners framing the eclipse. */
 @media (min-width: 1024px) and (min-aspect-ratio: 4/3) {
-  .ld-shadow--banner { display: block; animation-name: ld-shadow-in; }
+  .ld-figure--banner { display: block; animation-name: ld-figure-in; }
 }
-@keyframes ld-shadow-in {
+@keyframes ld-figure-in {
   from { opacity: 0; transform: translateY(6%); }
-  to { opacity: 0.85; transform: none; }
+  to { opacity: 1; transform: none; }
 }
 @media (max-width: 820px), (orientation: portrait) {
-  .ld-shadow--veena { width: 55vw; }
-  .ld-shadow--hand { width: 34vw; }
+  .ld-figure--veena { width: 55vw; }
+  .ld-figure--hand { width: 34vw; }
 }
 
 /* ---------------------------------------------------------------------------
@@ -379,7 +378,7 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   to { --ld-iris: 130vmax; }
 }
 .is-exit .ld-caption,
-.is-exit .ld-shadows { animation: ld-fade-out 0.4s ease-in both; }
+.is-exit .ld-figures { animation: ld-fade-out 0.4s ease-in both; }
 
 /* ---------------------------------------------------------------------------
    Shared

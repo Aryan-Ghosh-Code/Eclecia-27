@@ -51,8 +51,8 @@ const DUST = Array.from({ length: 24 }, (_, i) => {
 /**
  * Opening loader: totality, staged like curtain-up. A title card; gold dust
  * gathers into a sun while the event categories light up; the black moon
- * crosses it, a diamond-ring flash, the corona blooms; shadow figures rise
- * backlit by it; the wordmark is painted on over a lotus divider. Every
+ * crosses it, a diamond-ring flash, the corona blooms; the scene's art
+ * figures rise into its light; the wordmark is painted on over a lotus divider. Every
  * eclipse layer sits exactly on the hero's (see bootScript.ts), so the exit
  * iris, opening from the moon's centre, hands over to the identical eclipse
  * underneath. Timeline: styles/loader.css.
@@ -116,11 +116,11 @@ export function SiteLoader() {
       <div className="ld-eclipse">
         {art(ASSETS.cloudinary.bg, "ld-sky")}
 
-        <div className="ld-shadows">
-          {art(ASSETS.cloudinary.banner, "ld-shadow ld-shadow--banner ld-shadow--banner-l", vars({ "--i": 0 }))}
-          {art(ASSETS.cloudinary.banner, "ld-shadow ld-shadow--banner ld-shadow--banner-r", vars({ "--i": 0 }))}
-          {art(ASSETS.cloudinary.veena, "ld-shadow ld-shadow--veena", vars({ "--i": 1 }))}
-          {art(ASSETS.cloudinary.hand, "ld-shadow ld-shadow--hand", vars({ "--i": 2 }))}
+        <div className="ld-figures">
+          {art(ASSETS.cloudinary.banner, "ld-figure ld-figure--banner ld-figure--banner-l", vars({ "--i": 0 }))}
+          {art(ASSETS.cloudinary.banner, "ld-figure ld-figure--banner ld-figure--banner-r", vars({ "--i": 0 }))}
+          {art(ASSETS.cloudinary.veena, "ld-figure ld-figure--veena", vars({ "--i": 1 }))}
+          {art(ASSETS.cloudinary.hand, "ld-figure ld-figure--hand", vars({ "--i": 2 }))}
         </div>
 
         <div className="ld-dust" aria-hidden>
