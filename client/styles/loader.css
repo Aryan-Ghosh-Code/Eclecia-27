@@ -2,6 +2,13 @@
    (components/common/loader). The intro is authored against a 4.2 s timeline
    that starts at first paint; `.is-exit` plays the 0.8 s reveal (5 s total).
    Keep in sync with LOADER.buildMs / exitMs in constants/loader.ts.
+
+   0.05  title card: presenter line, "presents"        → out 0.85
+   0.55  gold dust drifts in and gathers into the sun  → sun born 1.15
+   1.35  event categories light up under it           → out 2.55
+   1.70  moon crosses; diamond ring 2.50; rays 2.65
+   2.55  shadow figures rise, backlit by the corona
+   3.00  mini sun; wordmark painted on; lotus divider 3.60
    ============================================================================ */
 
 @property --ld-iris {
@@ -33,16 +40,12 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   height: 108%;
   object-fit: cover;
   opacity: 0;
-  animation: ld-sky-in 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: ld-sky-in 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.6s both;
 }
 @keyframes ld-sky-in {
   from { opacity: 0; transform: scale(1.08); }
   to { opacity: 0.55; transform: scale(1); }
 }
-
-/* ---------------------------------------------------------------------------
-   Eclipse
-   --------------------------------------------------------------------------- */
 
 /* Geometry comes from the head boot script (components/common/loader/bootScript.ts):
    --ld-{m,r,s}{x,y,w} = viewport centre + width of the hero's moon, rays and
@@ -60,13 +63,122 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   pointer-events: none;
 }
 
+/* ---------------------------------------------------------------------------
+   1. Title card
+   --------------------------------------------------------------------------- */
+
+.ld-title {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 16px;
+  text-align: center;
+  animation: ld-title-out 0.35s ease-in 0.85s both;
+}
+.ld-title-eyebrow {
+  margin: 0;
+  max-width: 36em;
+  font-size: clamp(10px, 2.6vw, 13px);
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: rgba(236, 228, 210, 0.92);
+  animation: ld-track-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.05s both;
+}
+.ld-title-presents {
+  margin: 0;
+  font-size: clamp(18px, 4.4vw, 24px);
+  color: rgba(236, 228, 210, 0.8);
+  animation: ld-rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s both;
+}
+@keyframes ld-title-out {
+  to { opacity: 0; transform: translateY(-10px); filter: blur(4px); }
+}
+
+/* ---------------------------------------------------------------------------
+   2. Gold dust gathering into the sun
+   --------------------------------------------------------------------------- */
+
+.ld-dust { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.ld-dust span {
+  position: absolute;
+  left: var(--mx);
+  top: var(--my);
+  width: var(--sz);
+  height: var(--sz);
+  margin: calc(var(--sz) / -2);
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff3cf 0%, #e9b154 45%, transparent 72%);
+  box-shadow: 0 0 6px 1px rgba(233, 177, 84, 0.65);
+  opacity: 0;
+  animation: ld-dust 0.7s cubic-bezier(0.55, 0, 0.9, 0.55) var(--d) both;
+}
+@keyframes ld-dust {
+  0% { opacity: 0; transform: translate(calc(var(--dx) * 1vmax), calc(var(--dy) * 1vmax)) scale(1.5); }
+  20% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { opacity: 0; transform: translate(0, 0) scale(0.3); }
+}
+
+/* ---------------------------------------------------------------------------
+   3. Event categories
+   --------------------------------------------------------------------------- */
+
+.ld-cats {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  gap: 10px 0;
+  margin: 0 auto;
+  padding: 0;
+  max-width: min(90vw, 620px);
+  list-style: none;
+  animation: ld-fade-out 0.35s ease-in 2.55s both;
+}
+.ld-cats li {
+  display: flex;
+  align-items: center;
+  font-size: clamp(10px, 2.6vw, 13px);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(217, 164, 65, 0.45);
+  opacity: 0;
+  animation: ld-cat-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) calc(1.35s + var(--i) * 0.11s) both;
+}
+/* Taiganja has no middle dot: a small gold lozenge separates the words. */
+.ld-cats li + li::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  margin: 0 0.9em 0 0.6em;
+  background: var(--gold);
+  transform: rotate(45deg);
+  opacity: 0.7;
+}
+@keyframes ld-cat-in {
+  from { opacity: 0; transform: translateY(8px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+/* ---------------------------------------------------------------------------
+   4. Eclipse
+   --------------------------------------------------------------------------- */
+
 .ld-stage {
   position: absolute;
   left: calc(var(--mx) - var(--S) / 2);
   top: calc(var(--my) - var(--S) / 2);
   width: var(--S);
   height: var(--S);
-  z-index: 1;
+  z-index: 2;
 }
 .ld-stage > * { position: absolute; }
 
@@ -77,7 +189,7 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   width: var(--rw);
   height: var(--rw);
   opacity: 0;
-  animation: ld-rays-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2.3s both;
+  animation: ld-rays-in 1s cubic-bezier(0.16, 1, 0.3, 1) 2.65s both;
 }
 @keyframes ld-rays-in {
   0% { opacity: 0; transform: scale(0.62) rotate(-28deg); filter: brightness(2.2) blur(6px); }
@@ -85,7 +197,7 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   100% { opacity: 1; transform: scale(1) rotate(0); filter: brightness(1); }
 }
 
-/* The gold sun the moon will cover. */
+/* The gold sun, born as the dust lands; the moon will cover it. */
 .ld-sun {
   left: 17%;
   top: 17%;
@@ -97,12 +209,12 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
     0 0 calc(var(--S) * 0.12) calc(var(--S) * 0.04) rgba(255, 196, 96, 0.6),
     0 0 calc(var(--S) * 0.4) calc(var(--S) * 0.1) rgba(217, 164, 65, 0.28);
   animation:
-    ld-sun-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s both,
-    ld-sun-dim 1.6s ease-in 0.8s both;
+    ld-sun-born 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 1.15s both,
+    ld-sun-dim 0.9s ease-in 1.75s both;
 }
-@keyframes ld-sun-in {
-  from { opacity: 0; transform: scale(0.82); }
-  to { opacity: 1; transform: scale(1); }
+@keyframes ld-sun-born {
+  from { opacity: 0; transform: scale(0.2); filter: brightness(2.6); }
+  to { opacity: 1; transform: scale(1); filter: brightness(1.05); }
 }
 @keyframes ld-sun-dim {
   from { filter: brightness(1.05); }
@@ -114,7 +226,7 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   inset: 0;
   width: 100%;
   height: 100%;
-  animation: ld-moon-cross 1.8s cubic-bezier(0.55, 0, 0.2, 1) 0.5s both;
+  animation: ld-moon-cross 0.95s cubic-bezier(0.55, 0, 0.2, 1) 1.7s both;
 }
 @keyframes ld-moon-cross {
   0% { opacity: 0; transform: translate(-82%, 26%); }
@@ -134,7 +246,7 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
     linear-gradient(90deg, transparent 0 20%, rgba(255, 240, 210, 0.9) 50%, transparent 80% 100%) center / 100% 2% no-repeat,
     linear-gradient(0deg, transparent 0 30%, rgba(255, 240, 210, 0.8) 50%, transparent 70% 100%) center / 1.5% 100% no-repeat;
   mix-blend-mode: screen;
-  animation: ld-diamond 0.8s cubic-bezier(0.2, 0.8, 0.3, 1) 2.15s both;
+  animation: ld-diamond 0.6s cubic-bezier(0.2, 0.8, 0.3, 1) 2.5s both;
 }
 @keyframes ld-diamond {
   0% { opacity: 0; transform: translate(-50%, -50%) scale(0) rotate(0); }
@@ -150,12 +262,54 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   width: var(--sw);
   height: auto;
   opacity: 0;
-  animation: ld-bloom 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.8s both;
+  animation: ld-bloom 0.7s cubic-bezier(0.16, 1, 0.3, 1) 3s both;
 }
 @keyframes ld-bloom {
   from { opacity: 0; transform: scale(0.55); filter: brightness(2) blur(4px); }
   to { opacity: 1; transform: scale(1); filter: brightness(1) blur(0); }
 }
+
+/* ---------------------------------------------------------------------------
+   5. Shadow figures, backlit by the corona (shadow-puppet theatre)
+   --------------------------------------------------------------------------- */
+
+.ld-shadows { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.ld-shadow {
+  position: absolute;
+  height: auto;
+  /* Near-black cut-out with a gold rim: lit from behind, detail just visible. */
+  filter:
+    brightness(0.22) saturate(0.6)
+    drop-shadow(0 0 1.5px rgba(240, 200, 120, 0.95))
+    drop-shadow(0 0 14px rgba(217, 164, 65, 0.4));
+  opacity: 0;
+  animation: ld-shadow-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) calc(2.55s + var(--i) * 0.08s) both;
+}
+.ld-shadow--veena { left: -1.5%; bottom: -2%; width: min(32vw, 400px); }
+.ld-shadow--hand { right: -1%; bottom: -3%; width: min(20vw, 250px); }
+.ld-shadow--banner { top: 7vh; height: min(52vh, 460px); width: auto; display: none; }
+.ld-shadow--banner-l { left: 2vw; }
+.ld-shadow--banner-r { right: 2vw; scale: -1 1; }
+@keyframes ld-shadow-up {
+  from { opacity: 0; transform: translateY(28%); }
+  to { opacity: 0.95; transform: none; }
+}
+/* Wide landscape screens have room for the mirrored banners framing the eclipse. */
+@media (min-width: 1024px) and (min-aspect-ratio: 4/3) {
+  .ld-shadow--banner { display: block; animation-name: ld-shadow-in; }
+}
+@keyframes ld-shadow-in {
+  from { opacity: 0; transform: translateY(6%); }
+  to { opacity: 0.85; transform: none; }
+}
+@media (max-width: 820px), (orientation: portrait) {
+  .ld-shadow--veena { width: 55vw; }
+  .ld-shadow--hand { width: 34vw; }
+}
+
+/* ---------------------------------------------------------------------------
+   6. Wordmark, painted on, and the lotus divider
+   --------------------------------------------------------------------------- */
 
 .ld-caption {
   position: absolute;
@@ -164,38 +318,57 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   top: calc(var(--my) + var(--S) * 0.62);
   bottom: 0;
   transform: translateX(-50%);
-  width: min(86vw, 440px);
+  width: min(92vw, 620px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  z-index: 1;
+  z-index: 2;
 }
-.ld-eyebrow {
-  margin: 0;
-  font-size: clamp(9px, 2.4vw, 12px);
-  text-transform: uppercase;
-  color: rgba(236, 228, 210, 0.85);
-  white-space: nowrap;
-  animation: ld-track-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 2.95s both;
-}
-@keyframes ld-track-in {
-  from { opacity: 0; letter-spacing: 0.55em; }
-  to { opacity: 1; letter-spacing: 0.24em; }
-}
-.ld-wordmark {
+.ld-wm {
+  position: relative;
   width: min(70vw, 340px);
-  height: auto;
-  margin-top: -2%;
-  animation: ld-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 3.15s both;
+  /* Brush stroke: a soft edge sweeps left to right. */
+  -webkit-mask: linear-gradient(100deg, #000 44%, transparent 56%) 100% 0 / 260% 100% no-repeat;
+  mask: linear-gradient(100deg, #000 44%, transparent 56%) 100% 0 / 260% 100% no-repeat;
+  animation: ld-brush 0.8s cubic-bezier(0.5, 0, 0.3, 1) 3s both;
 }
-@keyframes ld-rise {
-  from { opacity: 0; transform: translateY(14px) scale(0.96); filter: blur(8px); }
-  to { opacity: 1; transform: none; filter: blur(0); }
+.ld-wordmark { display: block; width: 100%; height: auto; }
+@keyframes ld-brush {
+  from { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+  to { -webkit-mask-position: 0 0; mask-position: 0 0; }
+}
+/* A glint chasing the brush, clipped to the wordmark's shape. */
+.ld-glint {
+  position: absolute;
+  inset: 0;
+  -webkit-mask: var(--ld-wm) center / contain no-repeat;
+  mask: var(--ld-wm) center / contain no-repeat;
+  background: linear-gradient(100deg, transparent 38%, rgba(255, 244, 214, 0.9) 48%, rgba(255, 220, 150, 0.4) 53%, transparent 62%) 100% 0 / 300% 100% no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: ld-glint 0.75s ease-in-out 3.3s both;
+}
+@keyframes ld-glint {
+  0% { opacity: 1; background-position: 100% 0; }
+  85% { opacity: 1; }
+  100% { opacity: 0; background-position: 0 0; }
+}
+.ld-divider {
+  width: min(88vw, 460px);
+  height: auto;
+  margin-top: -6%;
+  animation: ld-unfurl 0.6s cubic-bezier(0.65, 0, 0.35, 1) 3.6s both;
+}
+@keyframes ld-unfurl {
+  from { clip-path: inset(0 50% 0 50%); opacity: 0.4; }
+  to { clip-path: inset(0 0 0 0); opacity: 1; }
 }
 
-/* Exit: an iris opens from the moon's centre onto the identical hero eclipse. */
+/* ---------------------------------------------------------------------------
+   Exit: an iris opens from the moon's centre onto the identical hero eclipse
+   --------------------------------------------------------------------------- */
+
 .site-loader.is-exit {
   -webkit-mask-image: radial-gradient(circle at var(--ld-mx, 50%) var(--ld-my, 30%), transparent var(--ld-iris), #000 calc(var(--ld-iris) + 6vmin));
   mask-image: radial-gradient(circle at var(--ld-mx, 50%) var(--ld-my, 30%), transparent var(--ld-iris), #000 calc(var(--ld-iris) + 6vmin));
@@ -205,12 +378,21 @@ html:not([data-loader-skip]):has(.site-loader:not(.is-exit)) { overflow: hidden;
   from { --ld-iris: -6vmin; }
   to { --ld-iris: 130vmax; }
 }
-.is-exit .ld-caption { animation: ld-fade-out 0.4s ease-in both; }
+.is-exit .ld-caption,
+.is-exit .ld-shadows { animation: ld-fade-out 0.4s ease-in both; }
 
 /* ---------------------------------------------------------------------------
    Shared
    --------------------------------------------------------------------------- */
 
+@keyframes ld-track-in {
+  from { opacity: 0; letter-spacing: 0.55em; }
+  to { opacity: 1; letter-spacing: 0.24em; }
+}
+@keyframes ld-rise {
+  from { opacity: 0; transform: translateY(14px) scale(0.96); filter: blur(8px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
 @keyframes ld-fade-out { to { opacity: 0; } }
 
 @media (prefers-reduced-motion: reduce) {

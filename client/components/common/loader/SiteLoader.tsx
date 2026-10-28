@@ -1,7 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { ASSETS } from "@/constants/assets";
 import { LOADER } from "@/constants/loader";
 
@@ -17,7 +17,7 @@ function firstPaintMs(): Promise<number> {
   return new Promise((res) => requestAnimationFrame(res));
 }
 
-const art = (src: string, className: string) => (
+const art = (src: string, className: string, style?: CSSProperties) => (
   <img
     src={src}
     alt=""
@@ -25,15 +25,37 @@ const art = (src: string, className: string) => (
     draggable={false}
     decoding="async"
     className={`pointer-events-none max-w-none select-none ${className}`}
+    style={style}
   />
 );
 
+const vars = (v: Record<string, string | number>) => v as CSSProperties;
+
+const CATEGORIES = ["Music", "Dance", "Drama", "Art", "Fashion", "Literary"];
+
 /**
- * Opening loader: totality. A gold sun, the black moon slides across it, a
- * diamond-ring flash at second contact, then the corona (the hero's rays
- * layer) blooms and the mini sun lights. Every layer sits exactly on the
- * hero's eclipse (see bootScript.ts), so the exit iris, opening from the
- * moon's centre, hands over to the identical eclipse underneath.
+ * Gold dust that gathers into the sun: golden-angle spiral, so it is spread
+ * evenly and identical on server and client (values rounded for hydration).
+ */
+const DUST = Array.from({ length: 24 }, (_, i) => {
+  const a = i * 2.39996;
+  const r = 34 + ((i * 37) % 31);
+  return vars({
+    "--dx": (Math.cos(a) * r).toFixed(2),
+    "--dy": (Math.sin(a) * r).toFixed(2),
+    "--sz": `${2 + ((i * 7) % 4)}px`,
+    "--d": `${(0.55 + (i % 8) * 0.055).toFixed(3)}s`,
+  });
+});
+
+/**
+ * Opening loader: totality, staged like curtain-up. A title card; gold dust
+ * gathers into a sun while the event categories light up; the black moon
+ * crosses it, a diamond-ring flash, the corona blooms; shadow figures rise
+ * backlit by it; the wordmark is painted on over a lotus divider. Every
+ * eclipse layer sits exactly on the hero's (see bootScript.ts), so the exit
+ * iris, opening from the moon's centre, hands over to the identical eclipse
+ * underneath. Timeline: styles/loader.css.
  */
 export function SiteLoader() {
   const [phase, setPhase] = useState<"intro" | "exit" | "gone">("intro");
@@ -93,6 +115,20 @@ export function SiteLoader() {
     >
       <div className="ld-eclipse">
         {art(ASSETS.cloudinary.bg, "ld-sky")}
+
+        <div className="ld-shadows">
+          {art(ASSETS.cloudinary.banner, "ld-shadow ld-shadow--banner ld-shadow--banner-l", vars({ "--i": 0 }))}
+          {art(ASSETS.cloudinary.banner, "ld-shadow ld-shadow--banner ld-shadow--banner-r", vars({ "--i": 0 }))}
+          {art(ASSETS.cloudinary.veena, "ld-shadow ld-shadow--veena", vars({ "--i": 1 }))}
+          {art(ASSETS.cloudinary.hand, "ld-shadow ld-shadow--hand", vars({ "--i": 2 }))}
+        </div>
+
+        <div className="ld-dust" aria-hidden>
+          {DUST.map((style, i) => (
+            <span key={i} style={style} />
+          ))}
+        </div>
+
         <div className="ld-stage">
           {art(ASSETS.cloudinary.blacksun, "ld-rays")}
           <div className="ld-sun" />
@@ -100,11 +136,30 @@ export function SiteLoader() {
           <span className="ld-diamond" />
           {art(ASSETS.cloudinary.minisun, "ld-minisun")}
         </div>
+
         <div className="ld-caption">
-          <p className="ld-eyebrow font-taiganja">
-            Heritage Institute of Technology, Kolkata
+          <ul className="ld-cats font-taiganja">
+            {CATEGORIES.map((c, i) => (
+              <li key={c} style={vars({ "--i": i })}>
+                {c}
+              </li>
+            ))}
+          </ul>
+          <div
+            className="ld-wm"
+            style={vars({ "--ld-wm": `url(${ASSETS.cloudinary.wordmarkBlacker})` })}
+          >
+            {art(ASSETS.cloudinary.wordmarkBlacker, "ld-wordmark")}
+            <span className="ld-glint" />
+          </div>
+          {art(ASSETS.cloudinary.divider, "ld-divider")}
+        </div>
+
+        <div className="ld-title">
+          <p className="ld-title-eyebrow font-taiganja">
+            Students of Heritage Institute of Technology, Kolkata
           </p>
-          {art(ASSETS.cloudinary.wordmarkBlacker, "ld-wordmark")}
+          <p className="ld-title-presents font-display italic">presents</p>
         </div>
       </div>
     </div>

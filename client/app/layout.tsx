@@ -185,6 +185,10 @@ export default function RootLayout({
         <link rel="preload" as="image" href={ASSETS.cloudinary.wordmarkBlacker} />
         <link rel="preload" as="image" href={ASSETS.cloudinary.blacksun} />
         <link rel="preload" as="image" href={ASSETS.cloudinary.minisun} />
+        <link rel="preload" as="image" href={ASSETS.cloudinary.veena} />
+        <link rel="preload" as="image" href={ASSETS.cloudinary.hand} />
+        <link rel="preload" as="image" href={ASSETS.cloudinary.banner} />
+        <link rel="preload" as="image" href={ASSETS.cloudinary.divider} />
       </head>
       <body className="min-h-full flex flex-col">
         <SiteLoader />
