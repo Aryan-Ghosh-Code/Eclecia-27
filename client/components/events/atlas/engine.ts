@@ -372,8 +372,10 @@ export function mountAtlas(root: HTMLElement, { categories: data, onDiscover }: 
     $("event-title").textContent = event.name;
     $("event-description").textContent = event.description;
     $("event-kind").textContent = event.kind;
-    $("event-counter").textContent = `${index + 1} / ${category.events.length} events`;
-    $("journey-label").textContent = `${index + 1} of ${category.events.length}`;
+    const clubName = event.club || "";
+    $("event-counter").textContent = clubName;
+    $("event-counter").style.display = clubName ? "inline-block" : "none";
+    $("journey-label").textContent = `${index + 1} OF ${category.events.length}`;
     $<HTMLButtonElement>("previous").disabled = index === 0;
     $<HTMLButtonElement>("next").disabled = index === category.events.length - 1;
     [...$("event-progress").children].forEach((b, i) => b.setAttribute("aria-current", String(i === index)));

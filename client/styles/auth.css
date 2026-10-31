@@ -104,3 +104,89 @@
     transition-delay: 0s !important;
   }
 }
+
+/* =========================================================================
+   Luxury Celestial Auth Box Overhauls (Bespoke Eclecia Aesthetic)
+   ========================================================================= */
+
+/* Atmospheric card background with cosmic glow & filigree corner anchors */
+.auth-card {
+  background: radial-gradient(circle at 75% 20%, rgba(20, 26, 32, 0.94), rgba(6, 9, 12, 0.98) 75%) !important;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.9),
+    0 0 45px rgba(217, 164, 65, 0.12),
+    inset 0 0 35px rgba(217, 164, 65, 0.04) !important;
+  border: 1px solid rgba(217, 164, 65, 0.45) !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+/* Double gold hairline framing */
+.auth-card::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(217, 164, 65, 0.22) !important;
+  pointer-events: none;
+}
+
+/* Filigree corner brackets on the card frame */
+.auth-card::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border: 1px dashed rgba(217, 164, 65, 0.16);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Inputs: refined parchment-slate field with gold accenting */
+.auth-field-input {
+  background: rgba(10, 16, 22, 0.65) !important;
+  border: 1px solid rgba(217, 164, 65, 0.28) !important;
+  color: #f3ebd8 !important;
+  transition: all 260ms cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.6) !important;
+}
+
+.auth-field-input:hover {
+  border-color: rgba(217, 164, 65, 0.5) !important;
+  background: rgba(13, 20, 27, 0.8) !important;
+}
+
+.auth-field-input:focus {
+  border-color: #f1c970 !important;
+  background: rgba(15, 23, 31, 0.92) !important;
+  box-shadow:
+    0 0 16px rgba(217, 164, 65, 0.22),
+    inset 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Tabs styling */
+.auth-tab-btn {
+  position: relative;
+  transition: all 280ms ease;
+}
+
+.auth-tab-btn[aria-selected="true"] {
+  color: #f5d288 !important;
+  text-shadow: 0 0 14px rgba(217, 164, 65, 0.5) !important;
+}
+
+/* Google OAuth button elevated styling */
+.auth-google-btn {
+  background: linear-gradient(180deg, rgba(14, 20, 26, 0.8), rgba(8, 12, 16, 0.9)) !important;
+  border: 1px solid rgba(217, 164, 65, 0.32) !important;
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(217, 164, 65, 0.2) !important;
+  transition: all 280ms ease !important;
+}
+
+.auth-google-btn:hover:not(:disabled) {
+  border-color: #ffd875 !important;
+  background: linear-gradient(180deg, rgba(22, 32, 42, 0.9), rgba(12, 18, 24, 0.95)) !important;
+  box-shadow:
+    0 0 22px rgba(217, 164, 65, 0.25),
+    0 6px 18px rgba(0, 0, 0, 0.7) !important;
+  transform: translateY(-1px);
+}

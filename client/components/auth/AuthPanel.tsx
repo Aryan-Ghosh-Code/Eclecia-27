@@ -315,7 +315,7 @@ export function AuthPanel({ googleEnabled, user }: AuthPanelProps) {
                   type="button"
                   disabled={busy}
                   onClick={() => signIn("google", { redirectTo: "/register" })}
-                  className="group relative flex w-full items-center justify-center gap-3 border border-gold/35 bg-black/30 py-3.5 font-sans text-[14px] font-medium tracking-wide text-parchment transition-all duration-300 hover:border-gold hover:bg-gold/10 hover:shadow-[0_0_18px_rgba(217,164,65,0.12)] disabled:cursor-not-allowed disabled:border-gold/15 disabled:bg-black/20 disabled:text-parchment/35 disabled:shadow-none disabled:hover:border-gold/15 disabled:hover:bg-black/20"
+                  className="auth-google-btn group relative flex w-full items-center justify-center gap-3 py-3.5 font-sans text-[14px] font-medium tracking-wide text-parchment transition-all duration-300 hover:text-white disabled:cursor-not-allowed disabled:border-gold/15 disabled:bg-black/20 disabled:text-parchment/35 disabled:shadow-none disabled:hover:border-gold/15 disabled:hover:bg-black/20"
                 >
                   <GoogleMark className="transition-all duration-300 group-disabled:opacity-35 group-disabled:grayscale-[0.7]" />
                   <span>Continue with Google</span>
@@ -426,7 +426,7 @@ function Tabs({ tab, onSelect }: { tab: Tab; onSelect: (tab: Tab) => void }) {
           aria-controls="auth-credentials"
           tabIndex={tab === id ? 0 : -1}
           onClick={() => onSelect(id)}
-          className={`pb-3 font-taiganja text-[15px] font-semibold tracking-[0.06em] transition-colors duration-300 ${
+          className={`auth-tab-btn pb-3 font-taiganja text-[15px] font-semibold tracking-[0.06em] transition-colors duration-300 ${
             tab === id ? "text-gold" : "text-parchment/55 hover:text-parchment"
           }`}
         >

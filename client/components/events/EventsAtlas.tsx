@@ -12,7 +12,7 @@ import { mountAtlas } from "./atlas/engine";
 import { MobileEventsAtlas } from "./MobileEventsAtlas";
 import "@/styles/events-atlas.css";
 
-const phoneQuery = "(max-width: 760px)";
+const phoneQuery = "(max-width: 1024px)";
 const subscribePhone = (notify: () => void) => {
   const media = window.matchMedia(phoneQuery);
   media.addEventListener("change", notify);
@@ -53,7 +53,14 @@ export function EventsAtlas({ categories }: { categories: AtlasCategory[] }) {
       <SiteHeader />
       <div ref={rootRef} className="events-atlas select-none" data-mode="atlas" data-intro="pending">
         <div className="sky" aria-hidden>
-          <div className="sky-texture" />
+          <div
+            className="sky-texture"
+            style={
+              ASSETS.cloudinary.eventsBackground
+                ? { backgroundImage: `url(${ASSETS.cloudinary.eventsBackground})` }
+                : undefined
+            }
+          />
           <img className="dust" src={atlasArt.shared("gold-dust")} alt="" draggable={false} />
           <div className="vignette" />
         </div>

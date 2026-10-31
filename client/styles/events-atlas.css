@@ -337,6 +337,278 @@ html:has(.events-atlas)::-webkit-scrollbar{display:none}
   }
 }
 
+/* Breadcrumb vertical alignment fix: keeps back button, divider and category title aligned on the exact optical centerline */
+.events-atlas .event-breadcrumb {
+  display: flex !important;
+  align-items: center !important;
+  line-height: 1 !important;
+  gap: 18px !important;
+}
+
+.events-atlas .event-breadcrumb button#back {
+  display: inline-flex !important;
+  align-items: center !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+  transition: color 0.25s ease;
+}
+
+.events-atlas .event-breadcrumb button#back span {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 16px !important;
+  line-height: 1 !important;
+  margin-right: 10px !important;
+  color: var(--gold) !important;
+  transform: translateY(-0.5px);
+  transition: transform 0.25s ease;
+}
+
+.events-atlas .event-breadcrumb button#back:hover span {
+  transform: translateX(-3px) translateY(-0.5px);
+}
+
+.events-atlas .breadcrumb-rule {
+  width: 1px !important;
+  height: 14px !important;
+  background: #d9a44169 !important;
+  flex-shrink: 0 !important;
+  align-self: center !important;
+  margin: 0 !important;
+}
+
+.events-atlas #breadcrumb {
+  display: inline-flex !important;
+  align-items: center !important;
+  line-height: 1 !important;
+  align-self: center !important;
+  font-family: var(--font-taiganja), Georgia, serif !important;
+  color: var(--gold) !important;
+  font-size: 13px !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 1. Next & Previous Buttons & X of Y Counter Prominence (Bottom Right) */
+.events-atlas .journey-controls {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  z-index: 35 !important;
+}
+
+.events-atlas .journey-controls button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 48px !important;
+  height: 48px !important;
+  border: 1.5px solid rgba(217, 164, 65, 0.65) !important;
+  border-radius: 50% !important;
+  background: rgba(4, 17, 22, 0.75) !important;
+  backdrop-filter: blur(8px) !important;
+  color: #fcefd6 !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  box-shadow: 0 0 14px rgba(217, 164, 65, 0.22) !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.events-atlas .journey-controls button:hover:not(:disabled) {
+  border-color: #ffd875 !important;
+  background: rgba(217, 164, 65, 0.22) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(217, 164, 65, 0.55) !important;
+  transform: scale(1.08) !important;
+}
+
+.events-atlas .journey-controls button:active:not(:disabled) {
+  transform: scale(0.95) !important;
+}
+
+.events-atlas .journey-controls button:disabled {
+  opacity: 0.25 !important;
+  cursor: not-allowed !important;
+  border-color: rgba(217, 164, 65, 0.2) !important;
+  box-shadow: none !important;
+}
+
+.events-atlas #journey-label {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.25em !important;
+  color: #f7d58b !important;
+  text-shadow: 0 0 10px rgba(217, 164, 65, 0.45) !important;
+}
+
+/* 2. Vertical Planet Progress Slider Prominence (Right) */
+.events-atlas .event-progress {
+  z-index: 35 !important;
+}
+
+.events-atlas .event-progress:before {
+  width: 2px !important;
+  background: linear-gradient(180deg, transparent, rgba(217, 164, 65, 0.6) 12%, rgba(217, 164, 65, 0.6) 88%, transparent) !important;
+  box-shadow: 0 0 8px rgba(217, 164, 65, 0.35) !important;
+}
+
+.events-atlas .progress-stop {
+  width: 32px !important;
+  height: 32px !important;
+  cursor: pointer !important;
+}
+
+.events-atlas .progress-stop:after {
+  width: 9px !important;
+  height: 9px !important;
+  border: 1.5px solid rgba(217, 164, 65, 0.85) !important;
+  background: rgba(14, 28, 36, 0.95) !important;
+  box-shadow: 0 0 8px rgba(217, 164, 65, 0.35) !important;
+  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.events-atlas .progress-stop:hover:after {
+  transform: scale(1.35) !important;
+  background: var(--gold) !important;
+  box-shadow: 0 0 14px var(--gold) !important;
+}
+
+.events-atlas .progress-stop[aria-current=true]:after {
+  width: 9px !important;
+  height: 9px !important;
+  background: #fdf2d0 !important;
+  border: 2px solid #ffffff !important;
+  transform: scale(1.65) !important;
+  box-shadow: 0 0 16px #f0c96d, 0 0 26px rgba(217, 164, 65, 0.7) !important;
+}
+
+/* 3. Category Worlds Dock Prominence & High Z-Index (Bottom Left) */
+.events-atlas .event-bottom {
+  z-index: 30 !important;
+}
+
+.events-atlas .category-dock {
+  position: relative !important;
+  z-index: 35 !important;
+  gap: 14px !important;
+}
+
+.events-atlas .dock-world {
+  position: relative !important;
+  z-index: 35 !important;
+  width: 48px !important;
+  height: 48px !important;
+  border: 1.5px solid rgba(217, 164, 65, 0.55) !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, rgba(16, 32, 42, 0.95) 0%, rgba(3, 14, 19, 0.98) 100%) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7), 0 0 12px rgba(217, 164, 65, 0.22) !important;
+  padding: 6px !important;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.events-atlas .dock-world img {
+  opacity: 0.92 !important;
+  filter: brightness(1.05) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6)) !important;
+}
+
+.events-atlas .dock-world:hover {
+  border-color: #ffd875 !important;
+  transform: translateY(-5px) scale(1.1) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8), 0 0 20px rgba(217, 164, 65, 0.5) !important;
+}
+
+.events-atlas .dock-world:hover img {
+  opacity: 1 !important;
+  filter: brightness(1.2) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.8)) !important;
+}
+
+.events-atlas .dock-world[aria-current=true] {
+  border: 2px solid #ffe299 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.85), 0 0 22px rgba(217, 164, 65, 0.65), 0 0 35px rgba(217, 164, 65, 0.35) !important;
+  transform: translateY(-4px) scale(1.12) !important;
+}
+
+.events-atlas .dock-world[aria-current=true] img {
+  opacity: 1 !important;
+  filter: brightness(1.2) drop-shadow(0 0 10px rgba(217, 164, 65, 0.6)) !important;
+}
+
+.events-atlas .dock-world span {
+  font-size: 10.5px !important;
+  font-weight: 600 !important;
+  color: #ffe299 !important;
+  letter-spacing: 0.12em !important;
+  text-shadow: 0 2px 8px #000, 0 0 12px rgba(217, 164, 65, 0.6) !important;
+}
+
 .events-atlas[data-intro=pending] .atlas-figures {
   opacity: 0;
+}
+
+
+/* =========================================================================
+   Event Scene: Expanded Description & Single-Line Kind / Club Meta
+   ========================================================================= */
+
+/* Make desktop event-copy wider like the category description, up to 680px */
+.events-atlas .event-copy {
+  width: 48% !important;
+  max-width: 680px !important;
+}
+
+/* Allow description text to breathe and occupy full width of copy area */
+.events-atlas #event-description {
+  max-width: 100% !important;
+  font-size: 19px !important;
+  line-height: 1.65 !important;
+  color: #e6dece !important;
+  margin: 18px 0 24px !important;
+}
+
+/* Force kind and club name to stay on ONE single line cleanly */
+.events-atlas .event-meta {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 16px !important;
+  white-space: nowrap !important;
+  font-size: 11px !important;
+  letter-spacing: 0.16em !important;
+  color: #e3cf9c !important;
+}
+
+.events-atlas .event-meta span {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.events-atlas .event-meta span + span {
+  border-left: 1px solid #a9894f !important;
+  padding-left: 16px !important;
+}
+
+/* Enlarge veena & mudra hand figures in computer / desktop atlas view */
+.events-atlas .atlas-figure--veena {
+  left: -2% !important;
+  bottom: -3% !important;
+  width: min(44vw, 680px) !important;
+  max-width: none !important;
+  filter: drop-shadow(0 0 28px rgba(217, 164, 65, 0.4)) !important;
+}
+
+.events-atlas .atlas-figure--hand {
+  right: -1.5% !important;
+  bottom: -4% !important;
+  width: min(30vw, 460px) !important;
+  max-width: none !important;
+  filter: drop-shadow(0 0 28px rgba(217, 164, 65, 0.4)) !important;
 }

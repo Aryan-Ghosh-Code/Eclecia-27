@@ -1,38 +1,43 @@
 /**
- * Seeds the events collection from the atlas line-up in constants/events.ts.
+ * Seeds the events collection from the atlas line-up in constants/events.ts
+ * and Cloudinary links in constants/assets.ts.
  *
- *   bun scripts/seed-events.ts            (reads MONGODB_URI from .env.local)
- *
- * Idempotent: upserts by slug. Name, category, kind and description follow the
- * constants on every run; logistics (date, venue, rules, fees, POCs...) are
- * only written as "TBA" placeholders the first time, so edits made in the DB
- * are never overwritten.
+ *   bun scripts/seed-events.ts
+ *   or: npx tsx --env-file=.env.local scripts/seed-events.ts
  */
 import mongoose from "mongoose";
 import { ATLAS_CATEGORIES } from "../constants/events";
+import { ASSETS } from "../constants/assets";
 import Event from "../lib/models/Events";
 
-const uri = process.env.MONGODB_URI;
-if (!uri) {
-  console.error('Missing MONGODB_URI (put it in client/.env.local)');
-  process.exit(1);
-}
+async function main() {
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    console.error("Missing MONGODB_URI (put it in client/.env.local)");
+    process.exit(1);
+  }
 
-await mongoose.connect(uri);
+  await mongoose.connect(uri);
 
-const ops = ATLAS_CATEGORIES.flatMap((category) =>
-  category.events.map((event) => ({
-    updateOne: {
-      filter: { slug: event.id },
-      update: {
+  const ops = ATLAS_CATEGORIES.flatMap((category) =>
+    category.events.map((event) => {
+      const catEvents = ASSETS.cloudinary.events[category.id];
+      const cloudBanner = catEvents ? catEvents[event.id] || "" : "";
+
+      const updateDoc: Record<string, any> = {
         $set: {
           eventName: event.name,
           category: category.name,
           kind: event.kind,
           description: event.description,
+          // Always sync clubs from constants so the DB stays up-to-date.
+          clubs: event.club ? [event.club] : [],
+          // If a Cloudinary artwork URL is listed in ASSETS, sync it to banner
+          ...(cloudBanner ? { banner: cloudBanner } : {}),
         },
         $setOnInsert: {
           slug: event.id,
+          ...(!cloudBanner ? { banner: "" } : {}),
           date: "TBA",
           time: "TBA",
           duration: "TBA",
@@ -43,15 +48,27 @@ const ops = ATLAS_CATEGORIES.flatMap((category) =>
           isPaidEvent: false,
           isActive: false,
         },
-      },
-      upsert: true,
-    },
-  })),
-);
+      };
 
-const result = await Event.bulkWrite(ops);
-console.log(
-  `events: ${ops.length} in line-up, ${result.upsertedCount} inserted, ${result.modifiedCount} updated`,
-);
+      return {
+        updateOne: {
+          filter: { slug: event.id },
+          update: updateDoc,
+          upsert: true,
+        },
+      };
+    }),
+  );
 
-await mongoose.disconnect();
+  const result = await Event.bulkWrite(ops);
+  console.log(
+    `events: ${ops.length} in line-up, ${result.upsertedCount} inserted, ${result.modifiedCount} updated`,
+  );
+
+  await mongoose.disconnect();
+}
+
+main().catch((err) => {
+  console.error("Failed to seed events:", err);
+  process.exit(1);
+});

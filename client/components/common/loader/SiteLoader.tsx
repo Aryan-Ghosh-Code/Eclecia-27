@@ -194,7 +194,11 @@ export function SiteLoader() {
         <div className="ld-stage">
           {art(ASSETS.cloudinary.blacksun, "ld-rays")}
           <div className="ld-sun">
-            {art("/assets/opt/loader/painted-sun-v1.webp", "ld-sun-art")}
+            {art(
+              ASSETS.cloudinary.loaderSun ||
+                "/assets/opt/loader/painted-sun-v1.webp",
+              "ld-sun-art",
+            )}
           </div>
           {art(ASSETS.cloudinary.blacksun2, "ld-moon")}
           <span className="ld-diamond" />

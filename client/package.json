@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seed:events": "bun --env-file=.env.local scripts/seed-events.ts"
+    "seed:events": "bun --env-file=.env.local scripts/seed-events.ts",
+    "seed:categories": "bun --env-file=.env.local scripts/seed-categories.ts"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

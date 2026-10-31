@@ -3,11 +3,21 @@ import mongoose, { Types } from "mongoose";
 export type EventCategory =
   | "Kalakriti"
   | "Tandav"
-  | "Rangmanch"
+  | "Natyam"
   | "Akshar"
   | "Roop Rang"
   | "Sargam"
   | "Brahmand";
+
+export interface IAtlasCategory {
+  /** Slug id, e.g. "kalakriti". */
+  id: string;
+  name: string;
+  kind: string;
+  line: string;
+  /** Cloudinary URL for the category artwork. */
+  image: string;
+}
 
 export interface IUser {
   _id: mongoose.Types.ObjectId;
