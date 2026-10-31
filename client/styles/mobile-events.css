@@ -48,12 +48,18 @@ body:has(.mobile-events) {
 }
 .mobile-events .m-sky {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100lvh;
   z-index: -2;
   pointer-events: none;
   background:
     linear-gradient(#0411168c, #041116b3 55%, #041116b8),
-    url("/assets/opt/events/site/background.webp") center/cover;
+    url("/assets/opt/events/site/background.webp") center/cover no-repeat;
+  transform: translateZ(0);
+  will-change: transform;
 }
 .mobile-events .m-figures {
   position: fixed;
@@ -90,7 +96,7 @@ body:has(.mobile-events) {
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
-  min-height: 100dvh;
+  min-height: 100svh;
   padding: 84px 0 max(12px, env(safe-area-inset-bottom));
 }
 .mobile-events .m-view {
@@ -816,20 +822,20 @@ body:has(.mobile-events) {
 
 .mobile-events .m-event-meta {
   display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: wrap !important;
+  flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 10px 14px !important;
+  gap: 8px !important;
   white-space: normal !important;
   max-width: 95% !important;
-  margin: 12px auto 4px !important;
+  margin: 14px auto 4px !important;
   overflow: visible !important;
   text-overflow: clip !important;
 }
 
 .mobile-events .m-meta-kind,
 .mobile-events .m-meta-club {
+  display: block !important;
   white-space: normal !important;
   overflow: visible !important;
   text-overflow: clip !important;
@@ -837,12 +843,7 @@ body:has(.mobile-events) {
 }
 
 .mobile-events .m-meta-rule {
-  display: inline-block !important;
-  width: 1px !important;
-  height: 12px !important;
-  background: #a9894f !important;
-  opacity: 0.8 !important;
-  flex-shrink: 0 !important;
+  display: none !important;
 }
 
 /* =========================================================================
