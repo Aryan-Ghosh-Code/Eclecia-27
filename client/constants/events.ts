@@ -73,35 +73,40 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
       {
         id: "manjari",
         name: "Manjari",
-        description: "One dancer. A story in every gesture.",
+        description:
+          "A celebration of timeless traditions and artistic elegance, where soulful expressions, captivating rhythms, and graceful movements bring the rich cultural heritage of the East to life.",
         kind: "Solo Eastern Dance",
         club: "Ghungroo: The Dance Club of HITK",
       },
       {
         id: "groovex",
         name: "Groovex",
-        description: "Find your rhythm. Own the floor.",
+        description:
+          "A stage for individuality and innovation, where bold moves, infectious beats, and personal style collide to create an electrifying celebration of contemporary dance.",
         kind: "Solo Western Dance",
         club: "Ghungroo: The Dance Club of HITK",
       },
       {
         id: "angika",
         name: "Angika",
-        description: "Many dancers, one expression.",
+        description:
+          "Where tradition meets togetherness, celebrating cultural roots through mesmerizing choreography, rhythmic harmony, and synchronized expressions that transform every performance into a visual masterpiece.",
         kind: "Group Eastern Dance",
         club: "Ghungroo: The Dance Club of HITK",
       },
       {
         id: "velocity",
         name: "Velocity",
-        description: "Move together. Make your mark.",
+        description:
+          "A spectacular fusion of energy, creativity, and coordination, where teams unite through dynamic choreography, vibrant beats, and powerful performances to set the stage ablaze.",
         kind: "Group Western Dance",
         club: "Ghungroo: The Dance Club of HITK",
       },
       {
         id: "glitch",
         name: "Glitch",
-        description: "Your crew. Your moves. Your moment.",
+        description:
+          "An ultimate showdown of moves and music, where attitude meets artistry! A thrilling face-off of freestyle, originality, and raw talent, as dancers battle through rhythm, creativity, and unstoppable energy.",
         kind: "Street Battle",
         club: "Ghungroo: The Dance Club of HITK",
       },
@@ -116,21 +121,24 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
       {
         id: "rangamancha",
         name: "Rangamancha",
-        description: "Bring a world to life before the curtain falls.",
+        description:
+          "A vivid tapestry of emotions unfolds on stage, where every tale is a mirror to life's intricate dance. Experience drama that lingers long after the curtains fall. Experience the magic long after the lights go out. ",
         kind: "Stage Play",
         club: "Anubhav: The Drama Club of HITK",
       },
       {
         id: "hunkaar",
         name: "Hunkaar",
-        description: "A voice that reaches beyond the stage.",
+        description:
+          "The 'Roar of the Streets' echoes through powerful narratives, challenging norms and stirring change. Witness the raw energy of street theatre that speaks truth to power. Witness the spark of imagination and grandeur of streets.",
         kind: "Street Play",
         club: "Anubhav: The Drama Club of HITK",
       },
       {
         id: "mukhosh",
         name: "Mukhosh",
-        description: "One performer. A thousand possibilities.",
+        description:
+          "Beneath a lone spotlight, one soul becomes many. Mukhosh unravels the dance between mask and truth, where silence speaks, and a single act echoes countless emotions.",
         kind: "Monoact",
         club: "Anubhav: The Drama Club of HITK",
       },
@@ -174,13 +182,14 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
     kind: "Fashion",
     line: "Beyond the runway and disguise, wear your imagination with pride.",
     events: [
-      // {
-      //   id: "",
-      //   name: "",
-      //   description: "The premier inter-collegiate runway arena where dragonlord grandeur meets avant-garde couture, challenging top student designers to bring the fire, factional rivalries, and imperial regalia of Westeros to life.",
-      //   kind: "Ramp Walk",
-      //   club: "The Heritage Fashion Club",
-      // },
+      {
+        id: "aurelis",
+        name: "AURELIS",
+        description:
+          "The premier inter-collegiate runway arena where dragonlord grandeur meets avant-garde couture, challenging top student designers to bring the fire, factional rivalries, and imperial regalia of Westeros to life.",
+        kind: "Ramp Walk",
+        club: "The Heritage Fashion Club",
+      },
       {
         id: "the-incarnates",
         name: "The Incarnates",
