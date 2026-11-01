@@ -145,21 +145,24 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
       {
         id: "echo-theatre",
         name: "Echo Theatre",
-        description: "Build an entire world through sound.",
+        description:
+          "No screens, just sounds. Build a world through voices, music, and sound effects. Let emotions collide, characters breathe, and imagination take centre stage.",
         kind: "Audio Drama",
         club: "Anahita: The Literary Club of HITK",
       },
       {
         id: "the-odyssey",
         name: "The Odyssey",
-        description: "Make us see the story you tell.",
-        kind: "Storytelling",
+        description:
+          "One story. One storyteller. Endless possibilities. Take us through unexpected twists, beautiful lies, and little heartbreaks. Hold our attention, and leave us wanting more.",
+        kind: "Single Storytelling",
         club: "Anahita: The Literary Club of HITK",
       },
       {
         id: "verbatim",
         name: "Verbatim",
-        description: "Give every word a life of its own.",
+        description:
+          "Some words deserve more than a page. Bring poetry, prose, or powerful verses to life with your voice, expression, and a little dramatic flair.",
         kind: "Recitation",
         club: "Anahita: The Literary Club of HITK",
       },
@@ -174,14 +177,15 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
       // {
       //   id: "",
       //   name: "",
-      //   description: "Carry your story down the runway.",
+      //   description: "The premier inter-collegiate runway arena where dragonlord grandeur meets avant-garde couture, challenging top student designers to bring the fire, factional rivalries, and imperial regalia of Westeros to life.",
       //   kind: "Ramp Walk",
       //   club: "The Heritage Fashion Club",
       // },
       {
         id: "the-incarnates",
         name: "The Incarnates",
-        description: "Step into a character. Make it yours.",
+        description:
+          "Step into the dragonlords' court as legends from any realm. This inter-college cosplay showdown challenges participants to embody iconic characters through exceptional craftsmanship and commanding stage presence.",
         kind: "Cosplay",
         club: "The Heritage Fashion Club",
       },
@@ -197,7 +201,7 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
         id: "surkala",
         name: "SurKala",
         description:
-          "The eastern solo singing competition is a celebration of classical and contemporary vocal traditions from across the  East. Showcasing exceptional solo talents in genres such as Hindustani, Carnatic,and other indigenous styles",
+          "The Eastern Solo Singing Competition celebrates classical and contemporary vocal traditions from across the East. Showcasing exceptional solo talents in genres such as Hindustani, Carnatic, and other indigenous styles.",
         kind: "Solo Singing (Eastern)",
         club: "Resonance: The Music Club of HITK",
       },
@@ -205,7 +209,7 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
         id: "voxtech",
         name: "Voxtech",
         description:
-          "The western solo singing event that celebrates the art of vocal performance, individual expression and stage presence across diverse western music genres such as pop, rock, jazz, blues, and contemporary hits.",
+          "The Western Solo Singing event that celebrates the art of vocal performance, individual expression and stage presence across diverse western music genres such as pop, rock, jazz, blues, and contemporary hits.",
         kind: "Solo Singing (Western)",
         club: "Resonance: The Music Club of HITK",
       },
@@ -221,7 +225,7 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
         id: "dhunkaar",
         name: "Dhunkaar",
         description:
-          "Get ready to witness the electrifying rhythm of Dhunkaar - Eastern Band competition, Where the soulful strains of tradition collide with the raw energy of live music, and every beat echoes the spirit of the East. From mesmerizing melodies to thunderous rhythms, it's a musical battlefield where passion meets prowess and only the most captivating band will strike the winning chord. Tune into the roots, unleash the rhythm, and let the Eastern soundscape roar - the stage is yours to conquer!",
+          "Witness Dhunkaar, where Eastern traditions collide with electrifying live music, soulful melodies meet thunderous rhythms, and passionate bands battle to captivate audiences and claim musical glory on stage!",
         kind: "Eastern Band Competition",
         club: "Resonance: The Music Club of HITK",
       },
@@ -229,7 +233,7 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
         id: "unison",
         name: "Unison",
         description:
-          "Where thunderous riffs collide, pounding drums ignite the stage, and raw vocals tear through the silence. This isn't just a competition - it's an all-out sonic showdown where attitude meets aggression, and only the band that can shake the ground and command the crowd will seize the crown. Crank up the amps, unleash the distortion, and let the music wage war - the stage is yours to dominate!",
+          "Where thunderous riffs, pounding drums, and raw vocals ignite an electrifying sonic showdown. Unleash the distortion, command the crowd, and let your music dominate the stage!",
         kind: "Western Band Competition",
         club: "Resonance: The Music Club of HITK",
       },
@@ -251,7 +255,8 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
       {
         id: "veritasium",
         name: "Veritasium",
-        description: "Follow your curiosity to the next answer.",
+        description:
+          "Where curiosity sparks and knowledge shines, test your wits, trust your instincts, and battle across science, history, sports, and more to claim the ultimate glory!",
         kind: "U25 General Quiz",
         club: "Atmadweep: The Quiz Club of HITK",
       },

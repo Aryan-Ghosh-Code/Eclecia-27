@@ -350,7 +350,7 @@ export function mountAtlas(root: HTMLElement, { categories: data, onDiscover }: 
         image(atlasArt.event(c.id, event.id), "planet-artwork", i === 0),
         image(atlasArt.shared("event-orbit"), "planet-ring front"),
       );
-      on(node, "click", () => (i === active ? discover() : goTo(i)));
+      on(node, "click", () => (Math.abs(progress - i) < 0.35 || i === active ? discover() : goTo(i)));
       $("planet-system").append(node);
       planets.push(node);
       const stop = document.createElement("button");

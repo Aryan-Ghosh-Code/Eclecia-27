@@ -546,11 +546,12 @@ export function MobileEventsAtlas({
                 <button
                   type="button"
                   ref={backRef}
+                  className="m-breadcrumb-back"
                   onClick={() =>
                     void changeView({ ...selection, mode: "categories" })
                   }
                 >
-                  ← All categories
+                  <span className="m-breadcrumb-back-arrow" aria-hidden="true">&larr;</span> <span>All categories</span>
                 </button>
                 <div className="m-breadcrumb-event-nav">
                   <button
@@ -605,8 +606,9 @@ export function MobileEventsAtlas({
                     const offset = index - selection.event;
                     if (Math.abs(offset) > 1) return null;
                     return (
-                      <div
+                      <button
                         key={item.id}
+                        type="button"
                         className="m-event-world"
                         style={
                           {
@@ -615,7 +617,15 @@ export function MobileEventsAtlas({
                             "--art-scale": offset === 0 ? 1.21 : 1,
                           } as CSSProperties
                         }
-                        aria-hidden="true"
+                        tabIndex={offset === 0 ? 0 : -1}
+                        aria-hidden={offset !== 0}
+                        aria-label={"Enter " + item.name}
+                        onClick={() => {
+                          if (canClick()) {
+                            if (offset === 0) onDiscover(c.id, item.id);
+                            else stepEvent(index);
+                          }
+                        }}
                       >
                         <img
                           className="m-world-base"
@@ -630,7 +640,7 @@ export function MobileEventsAtlas({
                           draggable={false}
                           onError={imageFailed}
                         />
-                      </div>
+                      </button>
                     );
                   })}
                 </div>
@@ -641,8 +651,20 @@ export function MobileEventsAtlas({
                 aria-live="polite"
                 aria-atomic="true"
               >
-                <h1>{event.name}</h1>
-                <p>{event.description}</p>
+                <h1
+                  onClick={() => onDiscover(c.id, event.id)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      onDiscover(c.id, event.id);
+                    }
+                  }}
+                  className="m-event-title-clickable"
+                >
+                  {event.name}
+                </h1>
                 <div className="m-event-meta">
                   <span className="m-meta-kind">{event.kind}</span>
                   {event.club && (
@@ -652,6 +674,7 @@ export function MobileEventsAtlas({
                     </>
                   )}
                 </div>
+                <p>{event.description}</p>
               </div>
               <div className="m-event-actions">
                 <GoldActionButton

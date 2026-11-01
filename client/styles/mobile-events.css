@@ -1578,3 +1578,134 @@ body:has(.mobile-events) {
     font-size: 20px !important;
   }
 }
+/* =========================================================================
+   Breadcrumb & Header Navigation Fixes (Prevent Squishing & Display Arrow)
+   ========================================================================= */
+
+.mobile-events .m-breadcrumb {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  padding: 0 16px !important;
+  min-height: 48px !important;
+}
+
+.mobile-events .m-breadcrumb-back {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: none !important;
+  border: none !important;
+  color: #ece4d2 !important;
+  font-family: var(--font-cormorant), Georgia, serif !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  padding: 6px 0 !important;
+}
+
+.mobile-events .m-breadcrumb-back:hover {
+  color: #ffd875 !important;
+}
+
+.mobile-events .m-breadcrumb-back-arrow {
+  display: inline-block !important;
+  font-size: 20px !important;
+  line-height: 1 !important;
+  color: #ffd875 !important;
+  transform: translateY(-1px);
+}
+
+.mobile-events .m-breadcrumb-event-nav {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+}
+
+.mobile-events .m-breadcrumb .m-event-header-btn {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  max-width: 34px !important;
+  min-height: 34px !important;
+  max-height: 34px !important;
+  flex: 0 0 34px !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 50% !important;
+  border: 1.2px solid rgba(217, 164, 65, 0.7) !important;
+  background: radial-gradient(circle, rgba(16, 32, 42, 0.95), rgba(4, 12, 16, 0.98)) !important;
+  color: #ffe299 !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  line-height: 1 !important;
+}
+
+.mobile-events .m-event-title-clickable {
+  cursor: pointer !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
+  user-select: none !important;
+}
+
+.mobile-events .m-event-title-clickable:hover {
+  color: #ffd875 !important;
+}
+
+.mobile-events .m-event-title-clickable:active {
+  transform: scale(0.98) !important;
+}
+
+@media (min-width: 600px) {
+  .mobile-events .m-breadcrumb .m-event-header-btn {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    flex: 0 0 40px !important;
+    font-size: 24px !important;
+  }
+}
+
+/* =========================================================================
+   Event Planet Interactive Styles & Special Taiganja Typography Matching
+   ========================================================================= */
+
+.mobile-events .m-event-world {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  cursor: pointer !important;
+  touch-action: pan-y !important;
+}
+
+.mobile-events .m-event-world:focus-visible {
+  outline-offset: 4px !important;
+  border-radius: 50% !important;
+}
+
+/* Event name styled with special Taiganja font identical to category name */
+.mobile-events .m-event-copy h1 {
+  font-family: var(--font-taiganja), var(--font-cormorant), Georgia, serif !important;
+  font-size: clamp(34px, 9vw, 42px) !important;
+  font-weight: 400 !important;
+  line-height: 1.14 !important;
+  letter-spacing: normal !important;
+  margin: 0 auto !important;
+  text-wrap: balance !important;
+  color: #ece4d2 !important;
+}
+
+@media (min-width: 600px) {
+  .mobile-events .m-event-copy h1 {
+    font-size: 58px !important;
+    line-height: 1.12 !important;
+  }
+}

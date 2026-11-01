@@ -612,3 +612,10 @@ html:has(.events-atlas)::-webkit-scrollbar{display:none}
   max-width: none !important;
   filter: drop-shadow(0 0 28px rgba(217, 164, 65, 0.4)) !important;
 }
+.events-atlas .event-planet:active, .events-atlas .category-world:active { scale: 1 !important; }
+
+/* Event Title in Computer/Desktop view using special Taiganja font */
+.events-atlas #event-title {
+  font-family: var(--font-taiganja), var(--font-cormorant), Georgia, serif !important;
+  font-weight: 400 !important;
+}
