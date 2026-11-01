@@ -96,6 +96,8 @@ export const ASSETS = {
           "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793485960/rangarupam.webp",
         drishya:
           "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793485958/drishya.webp",
+        framekatha:
+          "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793551179/framekatha.webp",
       },
       tandav: {
         manjari:

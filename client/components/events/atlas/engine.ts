@@ -155,7 +155,7 @@ export function mountAtlas(root: HTMLElement, { categories: data, onDiscover }: 
   frontCaption.tabIndex = -1;
   frontCaption.setAttribute("aria-hidden", "true");
   frontCaption.innerHTML =
-    '<span class="category-name"></span><span class="category-kind"></span><span class="world-enter">ENTER WORLD ↗</span>';
+    '<span class="category-name"></span><div class="category-meta-row"><span class="category-kind"></span><span class="category-meta-dot">·</span><span class="category-count"></span></div><span class="world-enter">ENTER WORLD ↗</span>';
   on(frontCaption, "click", () => {
     if (performance.now() >= blockOrbitClickUntil && frontWorld) enterCategory(frontWorld);
   });
@@ -247,7 +247,10 @@ export function mountAtlas(root: HTMLElement, { categories: data, onDiscover }: 
       frontCategory = data[front].name;
       frontWorld = data[front];
       frontCaption.querySelector(".category-name")!.textContent = frontWorld.name;
-      frontCaption.querySelector(".category-kind")!.textContent = `${frontWorld.kind} · ${frontWorld.events.length} events`;
+      const kindEl = frontCaption.querySelector(".category-kind");
+      const countEl = frontCaption.querySelector(".category-count");
+      if (kindEl) kindEl.textContent = frontWorld.kind;
+      if (countEl) countEl.textContent = `${frontWorld.events.length} events`;
     }
     if (solar) {
       const slot = solar.frontSlot();
@@ -256,7 +259,9 @@ export function mountAtlas(root: HTMLElement, { categories: data, onDiscover }: 
         Math.atan2(Math.sin(Math.PI - ORBIT_ANGLES[front] - orbitRotation), Math.cos(Math.PI - ORBIT_ANGLES[front] - orbitRotation)),
       );
       frontCaption.style.setProperty("--x", `${slot.x}px`);
-      frontCaption.style.setProperty("--y", `${slot.y + slot.size * 0.5 + (small ? 6 : 12)}px`);
+      const targetY = slot.y + slot.size * 0.5 + (small ? 4 : 8);
+      const safeY = Math.min(targetY, innerHeight - 68);
+      frontCaption.style.setProperty("--y", `${safeY}px`);
       frontCaption.style.opacity = clamp(1 - offset / (ORBIT_STEP * 0.42), 0, 1).toFixed(3);
       frontCaption.style.pointerEvents = offset < ORBIT_STEP * 0.1 ? "auto" : "none";
     }
@@ -1014,3 +1019,4 @@ export function mountAtlas(root: HTMLElement, { categories: data, onDiscover }: 
     $("scroll-track").style.height = "0px";
   };
 }
+

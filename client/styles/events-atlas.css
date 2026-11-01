@@ -597,25 +597,145 @@ html:has(.events-atlas)::-webkit-scrollbar{display:none}
 }
 
 /* Enlarge veena & mudra hand figures in computer / desktop atlas view */
+.events-atlas {
+  /* scene scales with whichever screen side is the limit */
+  --u: min(1vw, 1.9vh);   /* 1.9 ≈ 16:9 ratio compensation, tweak to taste */
+}
+
 .events-atlas .atlas-figure--veena {
-  left: -2% !important;
-  bottom: -3% !important;
-  width: min(44vw, 680px) !important;
-  max-width: none !important;
-  filter: drop-shadow(0 0 28px rgba(217, 164, 65, 0.4)) !important;
+  width: calc(var(--u) * 32);
+  max-width: none;
 }
-
 .events-atlas .atlas-figure--hand {
-  right: -1.5% !important;
-  bottom: -4% !important;
-  width: min(30vw, 460px) !important;
-  max-width: none !important;
-  filter: drop-shadow(0 0 28px rgba(217, 164, 65, 0.4)) !important;
+  width: calc(var(--u) * 20);
+  max-width: none;
 }
-.events-atlas .event-planet:active, .events-atlas .category-world:active { scale: 1 !important; }
-
+/* planets, orbit, heading: same pattern, calc(var(--u) * N) */
 /* Event Title in Computer/Desktop view using special Taiganja font */
 .events-atlas #event-title {
   font-family: var(--font-taiganja), var(--font-cormorant), Georgia, serif !important;
   font-weight: 400 !important;
+}
+
+/* =========================================================================
+   Vedic Celestial Front Caption Styling (Consistent with Site Atmosphere)
+   ========================================================================= */
+
+.events-atlas #front-caption {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  z-index: 95 !important;
+  transform: translate3d(var(--x, 50vw), var(--y, 80vh), 0) translateX(-50%) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: max-content !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* Category Title */
+.events-atlas #front-caption .category-name {
+  font-family: var(--font-taiganja), var(--font-cormorant), Georgia, serif !important;
+  font-size: clamp(34px, 2.5vw, 44px) !important;
+  font-weight: 400 !important;
+  line-height: 1.12 !important;
+  letter-spacing: 0.015em !important;
+  color: #fff2d1 !important;
+  text-shadow:
+    0 2px 14px rgba(0, 0, 0, 0.98),
+    0 0 24px rgba(217, 164, 65, 0.6),
+    0 0 45px rgba(217, 164, 65, 0.25) !important;
+  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease !important;
+}
+
+.events-atlas #front-caption:hover .category-name {
+  color: #ffd875 !important;
+  text-shadow:
+    0 2px 16px rgba(0, 0, 0, 1),
+    0 0 30px rgba(255, 216, 117, 0.9),
+    0 0 60px rgba(217, 164, 65, 0.5) !important;
+  transform: scale(1.02) !important;
+}
+
+/* Metadata Row: e.g. "FASHION · 2 EVENTS" */
+.events-atlas #front-caption .category-meta-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin-top: 5px !important;
+  font-family: var(--font-geist-mono), ui-monospace, monospace !important;
+  font-size: 11px !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  color: #cfc2a5 !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 10px rgba(0, 0, 0, 0.8) !important;
+}
+
+.events-atlas #front-caption .category-kind {
+  color: #e5cd94 !important;
+  font-weight: 500 !important;
+}
+
+.events-atlas #front-caption .category-meta-dot {
+  font-size: 14px !important;
+  line-height: 1 !important;
+  color: #d9a441 !important;
+  opacity: 0.75 !important;
+}
+
+.events-atlas #front-caption .category-count {
+  color: #b5a990 !important;
+}
+
+/* Ornate Celestial Enter Link with Lotus/Golden Accents */
+.events-atlas #front-caption .world-enter {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  margin-top: 7px !important;
+  font-family: var(--font-geist-mono), ui-monospace, monospace !important;
+  font-size: 10px !important;
+  letter-spacing: 0.32em !important;
+  text-transform: uppercase !important;
+  color: #e5c378 !important;
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.95),
+    0 0 12px rgba(217, 164, 65, 0.45) !important;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.events-atlas #front-caption .world-enter::before,
+.events-atlas #front-caption .world-enter::after {
+  content: "—" !important;
+  display: inline-block !important;
+  color: rgba(217, 164, 65, 0.5) !important;
+  letter-spacing: 0 !important;
+  transition: color 0.3s ease, transform 0.3s ease !important;
+}
+
+.events-atlas #front-caption:hover .world-enter {
+  color: #ffffff !important;
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 1),
+    0 0 20px rgba(255, 216, 117, 0.85) !important;
+}
+
+.events-atlas #front-caption:hover .world-enter::before {
+  color: #ffd875 !important;
+  transform: translateX(-3px) !important;
+}
+
+.events-atlas #front-caption:hover .world-enter::after {
+  color: #ffd875 !important;
+  transform: translateX(3px) !important;
 }

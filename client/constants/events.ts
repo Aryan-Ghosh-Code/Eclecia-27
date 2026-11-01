@@ -27,38 +27,43 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
     kind: "Art & Photography",
     line: "Brushstrokes, frames and fabric, where every canvas holds a story waiting to be seen.",
     events: [
-      // {
-      //   id: "",
-      //   name: "",
-      //   description: "A story told through your lens.",
-      //   kind: "Filmmaking",
-      //   club: "Pravasana: The Art & Photography Club of HITK",
-      // },
+      {
+        id: "framekatha",
+        name: "FrameKatha",
+        description:
+          "Unleash your storytelling skills through the art of filmmaking. Create compelling short films filled with creativity, emotions and powerful narratives. Bring your imagination to life through cinematic frames and leave a lasting impression on audiences.",
+        kind: "Short Film",
+        club: "Pravasana: The Art & Photography Club of HITK",
+      },
       {
         id: "patalila",
         name: "Patalila",
-        description: "Turn fabric into a canvas of your own.",
+        description:
+          "Transform plain fabrics into colourful masterpieces through artistic expression. Explore your creativity with vibrant colours, unique patterns and imaginative designs. Let every brushstroke tell a story and turn ordinary fabric into extraordinary artwork.",
         kind: "Fabric Painting",
         club: "Pravasana: The Art & Photography Club of HITK",
       },
       {
         id: "chitralekha",
         name: "Chitralekha",
-        description: "Make an image that says it all.",
+        description:
+          "Showcase your artistic vision through creative cover art and poster designs. Blend imagination, colours and visual storytelling to create eye-catching compositions. Transform simple ideas into striking designs that communicate emotions, concepts and stories.",
         kind: "Cover Art/ Poster Making",
         club: "Pravasana: The Art & Photography Club of HITK",
       },
       {
         id: "rangarupam",
         name: "Rangarupam",
-        description: "An expression beyond the canvas.",
+        description:
+          "Turn faces into living canvases with vibrant colours and imaginative designs. Express your creativity through artistic patterns, characters and visual storytelling. Combine originality, precision and teamwork to create stunning face art that captures attention.",
         kind: "Face Painting",
         club: "Pravasana: The Art & Photography Club of HITK",
       },
       {
         id: "drishya",
         name: "Drishya",
-        description: "Find the extraordinary in a single frame.",
+        description:
+          "Capture extraordinary stories through the lens of your camera. Explore the beauty of everyday moments, unique perspectives and visual storytelling. Transform fleeting moments into timeless memories through creative composition, observation and artistic vision.",
         kind: "Photography",
         club: "Pravasana: The Art & Photography Club of HITK",
       },
@@ -297,13 +302,13 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
         kind: "Shayari Competition",
         club: "Zubaan: The Language Club of HITK",
       },
-      {
-        id: "kavi-sammelan",
-        name: "Kavi Sammelan",
-        description: "An assembly of voices, united by poetry.",
-        kind: "Poetry Recitation",
-        club: "Zubaan: The Language Club of HITK",
-      },
+      // {
+      //   id: "kavi-sammelan",
+      //   name: "Kavi Sammelan",
+      //   description: "An assembly of voices, united by poetry.",
+      //   kind: "Poetry Recitation",
+      //   club: "Zubaan: The Language Club of HITK",
+      // },
     ],
   },
 ];
