@@ -27,6 +27,20 @@ export const SPONSORSHIP_HEADS = [
     email: "sayandeep.roy.bt27@heritageit.edu.in",
     phone: "+91 82405 39282",
   },
+  {
+    initials: "PB",
+    name: "Pawas Bhardwaj",
+    role: "Sponsorship Head",
+    email: "pawas.bhardwaj.ds27@heritageit.edu.in",
+    phone: "+91 70709 91945",
+  },
+  {
+    initials: "NR",
+    name: "Nikhil Raj",
+    role: "Sponsorship Head",
+    email: "nikhil.raj.cse27@heritageit.edu.in",
+    phone: "+91 62610 55645",
+  },
 ] as const;
 
 export const TEAM_MAILTO = `mailto:${[
