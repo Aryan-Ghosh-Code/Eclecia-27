@@ -19,6 +19,18 @@ async function main() {
 
   await mongoose.connect(uri);
 
+  // Drop existing categories collection as requested
+  try {
+    await AtlasCategory.collection.drop();
+    console.log("Dropped existing categories collection.");
+  } catch (err: any) {
+    if (err.code === 26 || err.message?.includes("ns not found")) {
+      console.log("Categories collection does not exist, proceeding to insert.");
+    } else {
+      console.warn("Notice on dropping collection:", err.message);
+    }
+  }
+
   const ops = ATLAS_CATEGORIES.map((category) => {
     const cloudImage = ASSETS.cloudinary.categories[category.id] || "";
 

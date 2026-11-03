@@ -1,12 +1,12 @@
 import mongoose, { Types } from "mongoose";
 
 export type EventCategory =
-  | "Kalakriti"
-  | "Tandav"
-  | "Natyam"
-  | "Akshar"
-  | "Roop Rang"
-  | "Sargam"
+  | "Celeste"
+  | "Taal Tarang"
+  | "Anubhuti"
+  | "BakyaRongo"
+  | "Aetheria"
+  | "Cadence"
   | "Brahmand";
 
 export interface IAtlasCategory {

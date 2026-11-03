@@ -69,17 +69,17 @@ export const ASSETS = {
 
     // Category Artwork (7 Worlds)
     categories: {
-      kalakriti:
+      celeste:
         "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793482979/kalakriti.webp",
-      tandav:
+      "taal-tarang":
         "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793482980/tandav.webp",
-      natyam:
+      anubhuti:
         "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793482979/natyam.webp",
-      akshar:
+      "bakya-rongo":
         "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793482979/akshar.webp",
-      "roop-rang":
+      aetheria:
         "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793482979/roop-rang.webp",
-      sargam:
+      cadence:
         "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793482979/sargram.webp",
       brahmand:
         "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793482979/brahmand.webp",
@@ -87,7 +87,7 @@ export const ASSETS = {
 
     // Event Artwork (by Category Slug -> Event Slug)
     events: {
-      kalakriti: {
+      celeste: {
         patalila:
           "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793485960/patalila.webp",
         chitralekha:
@@ -99,7 +99,7 @@ export const ASSETS = {
         framekatha:
           "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793551179/framekatha.webp",
       },
-      tandav: {
+      "taal-tarang": {
         manjari:
           "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793485992/manjari.webp",
         groovex:
@@ -111,7 +111,7 @@ export const ASSETS = {
         glitch:
           "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793485991/glitch.webp",
       },
-      natyam: {
+      anubhuti: {
         rangamancha:
           "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793485967/rangamancha.webp",
         hunkaar:
@@ -119,7 +119,7 @@ export const ASSETS = {
         mukhosh:
           "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793485967/mukhosh.webp",
       },
-      akshar: {
+      "bakya-rongo": {
         "echo-theatre":
           "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793485852/echo-theatre.webp",
         "the-odyssey":
@@ -127,11 +127,11 @@ export const ASSETS = {
         verbatim:
           "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793485852/verbatim.webp",
       },
-      "roop-rang": {
+      aetheria: {
         "the-incarnates":
           "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793485974/the-incarnates.webp",
       },
-      sargam: {
+      cadence: {
         surkala:
           "https://res.cloudinary.com/ajpcnwvo/image/upload/v1793485983/surkala.webp",
         voxtech:

@@ -19,6 +19,18 @@ async function main() {
 
   await mongoose.connect(uri);
 
+  // Drop existing events collection if requested/re-seeding
+  try {
+    await Event.collection.drop();
+    console.log("Dropped existing events collection.");
+  } catch (err: any) {
+    if (err.code === 26 || err.message?.includes("ns not found")) {
+      console.log("Events collection does not exist, proceeding to insert.");
+    } else {
+      console.warn("Notice on dropping events collection:", err.message);
+    }
+  }
+
   const ops = ATLAS_CATEGORIES.flatMap((category) =>
     category.events.map((event) => {
       const catEvents = ASSETS.cloudinary.events[category.id];

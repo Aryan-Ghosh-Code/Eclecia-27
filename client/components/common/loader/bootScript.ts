@@ -15,6 +15,9 @@ const LAYERS = ["moon", "rays", "minisun"] as const;
  *    exit iris hands over to an identical eclipse underneath.
  */
 export function loaderBootScript(): string {
+  if (process.env.NEXT_PUBLIC_ENABLE_LOADER !== "true") {
+    return `(function(){document.documentElement.dataset.loaderSkip="1"})()`;
+  }
   const data = {
     key: LOADER.storageKey,
     once: LOADER.oncePerSession,

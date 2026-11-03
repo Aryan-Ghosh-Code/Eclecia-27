@@ -11,12 +11,12 @@ export type EventSummary = Pick<IEvent, "slug" | "eventName" | "description">;
 
 /** Fixed display order for the seven worlds. */
 const CATEGORY_ORDER = [
-  "kalakriti",
-  "tandav",
-  "natyam",
-  "akshar",
-  "roop-rang",
-  "sargam",
+  "celeste",
+  "taal-tarang",
+  "anubhuti",
+  "bakya-rongo",
+  "aetheria",
+  "cadence",
   "brahmand",
 ] as const;
 

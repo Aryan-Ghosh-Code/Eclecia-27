@@ -7,12 +7,12 @@ export interface IEventDocument extends IEvent, mongoose.Document {
 }
 
 export const EVENT_CATEGORIES = [
-  "Kalakriti",
-  "Tandav",
-  "Natyam",
-  "Akshar",
-  "Roop Rang",
-  "Sargam",
+  "Celeste",
+  "Taal Tarang",
+  "Anubhuti",
+  "BakyaRongo",
+  "Aetheria",
+  "Cadence",
   "Brahmand",
 ] as const;
 

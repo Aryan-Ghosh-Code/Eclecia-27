@@ -22,8 +22,8 @@ export interface AtlasCategory {
 
 export const ATLAS_CATEGORIES: AtlasCategory[] = [
   {
-    id: "kalakriti",
-    name: "Kalakriti",
+    id: "celeste",
+    name: "Celeste",
     kind: "Art & Photography",
     line: "Brushstrokes, frames and fabric, where every canvas holds a story waiting to be seen.",
     events: [
@@ -70,8 +70,8 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
     ],
   },
   {
-    id: "tandav",
-    name: "Tandav",
+    id: "taal-tarang",
+    name: "Taal Tarang",
     kind: "Dance",
     line: "From classical grace to street-fire swagger, let every step shake the ground.",
     events: [
@@ -118,8 +118,8 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
     ],
   },
   {
-    id: "natyam",
-    name: "Natyam",
+    id: "anubhuti",
+    name: "Anubhuti",
     kind: "Drama",
     line: "Where characters come alive, stories unfold, and every moment commands the stage.",
     events: [
@@ -150,8 +150,8 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
     ],
   },
   {
-    id: "akshar",
-    name: "Akshar",
+    id: "bakya-rongo",
+    name: "BakyaRongo",
     kind: "Literary",
     line: "Where words find their voice, stories find their wings, and verses leave their mark.",
     events: [
@@ -182,8 +182,8 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
     ],
   },
   {
-    id: "roop-rang",
-    name: "Roop Rang",
+    id: "aetheria",
+    name: "Aetheria",
     kind: "Fashion",
     line: "Beyond the runway and disguise, wear your imagination with pride.",
     events: [
@@ -206,8 +206,8 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
     ],
   },
   {
-    id: "sargam",
-    name: "Sargam",
+    id: "cadence",
+    name: "Cadence",
     kind: "Music",
     line: "Voices, strings and rhythms collide as seven notes spill into infinite stories.",
     events: [
@@ -298,8 +298,9 @@ export const ATLAS_CATEGORIES: AtlasCategory[] = [
       {
         id: "pentathlon",
         name: "Pentathlon",
-        description: "Let every sher leave an impression.",
-        kind: "Shayari Competition",
+        description:
+          "Pentathlon is a fun-filled, five-round linguistic competition celebrating creativity, teamwork, communication, quick thinking and language skills through engaging and unconventional challenges.",
+        kind: "Linguistic Competition",
         club: "Zubaan: The Language Club of HITK",
       },
       // {

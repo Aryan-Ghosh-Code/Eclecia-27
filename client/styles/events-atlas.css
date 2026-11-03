@@ -168,7 +168,7 @@ html:has(.events-atlas)::-webkit-scrollbar{display:none}
    after returning. Their perspective rotateY keeps them composited anyway. */
 .events-atlas #overview .category-world .world-art{will-change:auto}
 /* Stand-in for the chosen world during the dive (see enterCategory). */
-.events-atlas .atlas-lens{position:absolute;inset:0;z-index:3;pointer-events:none}.events-atlas .atlas-lens *{pointer-events:none!important}
+.events-atlas .atlas-lens{position:fixed;inset:0;z-index:99;pointer-events:none}.events-atlas .atlas-lens *{pointer-events:none!important}
 /* World view legibility: the event copy sits over the corona's bright arc.
    A soft dark pool behind the block, a dimmer corona, brighter body text
    and a larger meta line keep it readable without boxing it in. */

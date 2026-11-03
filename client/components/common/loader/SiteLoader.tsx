@@ -166,6 +166,7 @@ export function SiteLoader() {
     };
   }, []);
 
+  if (process.env.NEXT_PUBLIC_ENABLE_LOADER !== "true") return null;
   if (phase === "gone") return null;
 
   return (

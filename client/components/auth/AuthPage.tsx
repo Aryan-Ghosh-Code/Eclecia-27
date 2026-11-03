@@ -1,3 +1,4 @@
+import AuthComingSoon from "./AuthComingSoon";
 /* eslint-disable @next/next/no-img-element */
 import { Suspense, type ReactNode } from "react";
 import { auth, googleEnabled } from "@/auth";
@@ -10,6 +11,9 @@ import "@/styles/auth.css";
 
 /** Server shell for the (auth) layout: reads the session, renders the panel. */
 export async function AuthPage({ children }: { children: ReactNode }) {
+  if (process.env.NEXT_PUBLIC_ENABLE_REGISTRATION !== "true") {
+    return <AuthComingSoon />;
+  }
   let session = null;
   try {
     session = await auth();
